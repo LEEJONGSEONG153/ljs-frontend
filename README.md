@@ -1,4 +1,4 @@
-# ljs_front
+# ljs-frontend
 
 ## Project setup
 ```
