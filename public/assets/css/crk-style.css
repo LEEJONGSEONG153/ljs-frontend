@@ -1,0 +1,2356 @@
+
+/* -------- Login -------- */
+.login{
+    height: 100vh;
+    padding: 10rem;
+}
+.login .container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6rem;
+}
+.landing-wrap{
+    width: 80rem;
+    height: 100%;
+    background: var(--grey-100);
+    border-radius: 2rem;
+}
+.login-wrap{
+    width: 100%;
+    height: auto;
+    flex: 1;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-area{
+    width: 34rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.4rem;
+}
+.login-area h1{
+    width: 5.78rem;
+}
+.login-area h4{
+    color: var(--blue-700);
+}
+.login-input-wrap .input-wrap{
+    margin-bottom: 1.2rem;
+}
+.login .non-members{
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--grey-200);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* alarm list 알림 내역 */
+.filter-area{
+    display: flex;
+    align-items: stretch;
+    gap: 2.4rem;
+}
+.filter-area .select-group{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    flex-grow: 1;
+}
+.filter-area .select-wrap{
+    width: 15%;
+    flex-grow: 1;
+}
+.filter-area .input-wrap{flex-grow: 1;}
+
+.table-area .search-result p,
+.chart-area .search-result p{
+    font-size: 1.7rem;
+}
+.table-area .search-result p.result,
+.chart-area .search-result p.result{
+    font-weight: 700;
+    color: var(--blue-300);
+}
+
+/* add user info 사용자 추가 팝업 */
+#add-user-info .popup-content form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.history-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.6rem;
+    border-radius: 0.8rem;
+    background-color: var(--grey-50);
+    margin-top: 2rem;
+}
+.history-wrap .history{
+    display: flex;
+    gap: 0.4rem;
+}
+.history-wrap .history span{
+    font-size: 1.4rem;
+    color: var(--grey-400);
+}
+.history-wrap .history span.label{
+    font-weight: 700;
+    margin-right: 0.4rem;
+}
+
+/* 권한별 메뉴 관리 authority-menu-manage */
+.authority-menu-manage .table-area .input-wrap{
+    width: 24rem;
+    flex-grow: 1;
+}
+.authority-menu-manage .select-wrap{
+    width: 20rem;
+    flex-grow: 1;
+}
+.menu-copy-wrap{
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.4rem;
+    border-radius: 0.8rem;
+    border: 1px solid var(--grey-200);
+}
+.menu-copy-wrap .el-select__wrapper{
+    padding: 0.8rem 1rem;
+    box-shadow: none;
+}
+
+/* 내 정보 관리 my-info */
+.my-info .card .flex-ss{
+    gap: 4rem;
+}
+.my-info .card .table{
+    min-width: 40rem;
+    width: 34%;
+}
+.my-info .card .my-info-edit{
+    padding: 4rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+    flex: 1;
+}
+.my-info .card .my-info-edit form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+/* 딜러용 대시보드 dealer-dashboard */
+.dealer-dashboard .filter-area{
+    align-items: center;
+    justify-content: space-between;
+    gap: 10rem;
+    margin-bottom: 2rem;
+}
+.current-status-area{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.current-status-area .card-wrap{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+}
+.tab-contents.alarm .current-status-area .card-wrap{flex-wrap: nowrap;}
+.current-status-area .card-wrap .card{
+    width: calc((100% / 5) - 2rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dealer-dashboard .card.map{padding: 0;}
+.dealer-dashboard .kakao-map{
+    padding: 0;
+}
+.dealer-dashboard .map-wrap{
+    width: 100%;
+    height: 20rem;
+    overflow: hidden;
+}
+
+.tab-contents.alarm .current-status-area .card-wrap .card{
+    width: calc(100% / 3);
+}
+
+.tab-contents.alarm .current-status-area .card-wrap:first-child::after{
+    display: inline-flex;
+    content: '';
+    width: 1px;
+    height: 8rem;
+    background-color: var(--grey-200);
+    margin: 0 2rem;
+}
+
+.tab-contents.alarm .thismonth-complete,
+.tab-contents.alarm .as-complete{background: var(--grey-300);}
+.tab-contents.alarm .thismonth-complete .label,
+.tab-contents.alarm .as-complete .label{color: var(--grey-100);}
+.tab-contents.alarm .thismonth-complete .value,
+.tab-contents.alarm .as-complete .value{color: var(--white);}
+.tab-contents.alarm .card-wrap .card p{flex-shrink: 0;}
+
+.side-layer .prd-info-wrap,
+#prd-not-place .prd-list-wrap{
+    max-height: calc(100vh - 31.2rem);
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+    padding: 0 1.2rem;
+    overflow-y: auto;
+}
+.side-layer .prd-info-wrap li,
+#prd-not-place .prd-list-wrap li{
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--grey-100);
+}
+.side-layer .prd-info-wrap li:last-child,
+#prd-not-place .prd-list-wrap li:last-child{border: 0;}
+.side-layer.install .prd-info-wrap li .checkbox{margin-top: 0.4rem;}
+.prd-info-wrap li .install-prd-info{flex: 1;}
+.prd-info-wrap li .install-prd-info p{
+    font-size: 1.7rem;
+}
+.prd-info-wrap li .install-prd-info .status p{
+    color: var(--grey-400);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.prd-info-wrap li .install-prd-info .txt-wrap p{
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--grey-300);
+    gap: 0.4rem;
+    margin-right: 1rem;
+}
+.prd-info-wrap li .install-prd-info .txt-wrap p:after{
+    display: inline-flex;
+    content: '|';
+    margin-left: 1rem;
+}
+.prd-info-wrap li .install-prd-info .txt-wrap p:last-child:after{display: none;}
+.prd-info-wrap li .install-prd-info .txt-wrap.red p{
+    color: var(--red);
+}
+
+.side-layer.alarm .system-label{
+    width: fit-content;
+    max-width: fit-content;
+    flex-direction: column;
+}
+.side-layer.alarm .prd-info-wrap li{
+    gap: 2rem;
+}
+.side-layer.alarm .txt-area{position: relative;}
+.side-layer.alarm .txt-area .icon-btn{
+    position: absolute;
+    top: -0.4rem;
+    right: 0;
+    border-radius: 0.4rem;
+    padding: 0.4rem;
+}
+.side-layer.alarm .txt-area .icon-btn:hover{
+    box-shadow: 0 0 10px rgba(11, 46, 130, 0.3);
+}
+.side-layer.alarm .prd-info-wrap .txt-wrap{
+    gap: 0.6rem;
+}
+.side-layer.alarm .prd-info-wrap .date,
+.side-layer.alarm .prd-info-wrap .time{
+    font-size: 1.7rem;
+    color: var(--grey-300);
+}
+.side-layer.alarm .prd-info-wrap .error-code,
+.side-layer.alarm .prd-info-wrap .error-txt{
+    font-size: 1.7rem;
+}
+
+
+/* 메일 작성 팝업 */
+#write-mail .mail-address-wrap{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1rem;
+
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--grey-100);
+    margin-bottom: 0.6rem;
+}
+#write-mail .label{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--grey-500);
+    flex-shrink: 0;
+}
+#write-mail .mail-address{
+    font-size: 1.7rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    background-color: var(--blue-25);
+}
+#write-mail .mail-title{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+#write-mail .mail-title .input-wrap{width: 100%;}
+
+
+/* 알림 내역 */
+.alarm-list .filter-area button,
+.monitoring_by-shop .filter-area button,
+.service-history .filter-area button,
+.process-guide .filter-area button,
+.alarm-analyze .filter-area button,
+.monitoring-analyze .filter-area button,
+.prd-info .filter-area button,
+.install-person .filter-area button,
+.diagnosis-guide .filter-area button{height: 100%;}
+
+
+/* 알림 상세 */
+.alarm-list-detail .alarm-info-wrap,
+.prd-list-detail .prd-info-wrap{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.alarm-list-detail .alarm-info-wrap .num,
+.prd-list-detail .prd-info-wrap{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--blue-400);
+    margin-right: 0.4rem;
+}
+.alarm-list-detail .alarm-info-wrap .txt-wrap .txt-wrap,
+.prd-list-detail .prd-info-wrap .txt-wrap .txt-wrap{
+    font-size: 1.5rem;
+    color: var(--grey-400);
+}
+.alarm-list-detail .alarm-info-wrap .txt-wrap .txt-wrap::before,
+.prd-list-detail .prd-info-wrap .txt-wrap .txt-wrap::before{
+    content: '(';
+}
+.alarm-list-detail .alarm-info-wrap .txt-wrap .txt-wrap::after,
+.prd-list-detail .prd-info-wrap .txt-wrap .txt-wrap::after{
+    content: ')';
+}
+.alarm-list-detail .alarm-info-wrap .txt-wrap .txt-wrap .tit,
+.prd-list-detail .prd-info-wrap .txt-wrap .txt-wrap .tit{
+    margin-right: 0.4rem;
+}
+
+.alarm-list-detail .alarm-mng-wrap,
+.prd-list-detail .prd-mng-wrap{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem 4rem;
+    padding: 1.4rem;
+    border-radius: 0.4rem;
+    background-color: var(--grey-50);
+    margin: 1rem 0 2rem;
+}
+.alarm-list-detail .alarm-mng-wrap li,
+.prd-list-detail .prd-mng-wrap li{flex-shrink: 0;}
+.alarm-list-detail .alarm-mng-wrap p,
+.prd-list-detail .prd-mng-wrap p{
+    font-size: 1.5rem;
+    color: var(--grey-400);
+    margin-right: 0.4rem;
+}
+.alarm-list-detail .alarm-mng-wrap li p:last-child,
+.prd-list-detail .prd-mng-wrap li p:last-child{margin-right: 0;}
+.alarm-list-detail .alarm-mng-wrap p.tit,
+.prd-list-detail .prd-mng-wrap p.tit{
+    font-weight: 700;
+    margin-right: 1rem;
+}
+
+.alarm-list-detail .alarm-content{
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+.prd-list-detail .prd-content{
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+.alarm-list-detail .alarm-content > div,
+.prd-list-detail .prd-content > div{
+    width: calc(100% - 1rem);
+}
+
+.alarm-list-detail .prd-card,
+.prd-list-detail .prd-card{
+    width: initial;
+    box-shadow: none;
+    border: 1px solid var(--grey-100);
+}
+.alarm-list-detail .prd-img,
+.prd-list-detail .prd-img{
+    width: initial;
+    height: initial;
+    min-width: 26rem;
+    min-height: 26rem;
+}
+.prd-card ul.prd-info{
+    min-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.prd-card ul .txt-wrap{
+    justify-content: space-between;
+    gap: 2rem;
+}
+.prd-card ul .txt-wrap p{
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.prd-card ul .txt-wrap p.tit{font-weight: 700;}
+.prd-card ul .txt-wrap p span{
+    font-size: 1.5rem;
+    color: var(--grey-300);
+}
+.alarm-list-detail .prd-card .btn-wrap button,
+.prd-list-detail .prd-card .btn-wrap button{width: 100%;}
+
+.prd-list-detail .part-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+.prd-list-detail .line-card .btn-wrap .medium{flex-shrink: 0;}
+.prd-list-detail .edit-btn .icon{
+    position: initial;
+    transform: initial;
+}
+.prd-list-detail .edit-btn{
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+}
+
+#custoemr-business-popup .shop-list{
+    padding: 1.4rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-200);
+    max-height: 16rem;
+    overflow-y: auto;
+}
+#custoemr-business-popup .shop-list li{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+#custoemr-business-popup .shop-list li:last-child{margin-bottom: 0;}
+
+
+
+/* 서비스 대시보드 */
+.service-dashboard .card-wrap{
+    flex-wrap: nowrap;
+    gap: 4rem;
+}
+.service-dashboard .service-status-wrap{
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.service-dashboard .card-wrap .card{
+    width: 60%;
+}
+.service-dashboard .card.service-status{width: 40%;}
+.service-dashboard .card.service-status .date-wrap{
+    width: 14rem;
+    margin-left: auto;
+}
+.service-dashboard .service-status-wrap .status-item{
+    width: calc(50% - 1rem);
+    height: auto;
+    border: 1px solid var(--grey-100);
+    border-radius: 0.4rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+.service-dashboard .service-status-wrap .status-item .txt-wrap{
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.status-item .label{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--grey-400);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+.status-item .tag{
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem;
+    border-radius: 0.4rem;
+}
+.status-item .tag.up{
+    background-color: rgba(239, 59, 102, 0.06);
+    color: var(--red);
+}
+.status-item .tag.down{
+    background-color: rgba(63, 103, 197, 0.06);
+    color: var(--blue-400);
+}
+.service-dashboard .filter-area{margin-bottom: 2rem;}
+.service-dashboard .map-wrap{width: 88rem;}
+
+.service-dashboard .swiper-slide{
+    min-width: 20.4rem;
+    height: fit-content;
+}
+.service-dashboard .swiper-slide .line-card,
+.line-card.alarm-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+    gap: 1rem;
+}
+.service-dashboard .swiper-slide .line-card p{
+    font-size: 1.5rem;
+    color: var(--grey-300);
+    text-align: center;
+}
+.service-dashboard .swiper-slide .line-card .system-status,
+.line-card.alarm-type .system-status{
+    width: calc(100% + 4rem);
+    border-top: 1px solid var(--grey-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-top: 1rem;
+}
+.service-dashboard .swiper-slide .line-card .system-status p,
+.line-card.alarm-type .system-status p{
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+
+/* 알림 설정 */
+#receiver-popup .popup-content,
+#receiver-popup form{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+#receiver-popup form{gap: 2rem;}
+#receiver-popup .part-wrap .tit{
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+#receiver-popup .sub-tit{
+    font-size: 1.5rem;
+    color: var(--grey-400);
+    margin-bottom: 1rem;
+}
+
+
+
+/* 연구소 대시보드 */
+.accumulate-status-wrap{
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+.accumulate-status-wrap .all-accmulate,
+.accumulate-status-wrap .month-accmulate{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.accumulate-status-wrap .all-accmulate{width: calc(40% - 10rem);}
+.accumulate-status-wrap .month-accmulate{width: calc(60% - 10rem);}
+.accumulate-status-wrap > div .card{
+    flex-shrink: 0;
+    text-align: center;
+}
+.accumulate-status-wrap button{margin-left: auto;}
+.accumulate-status-wrap .accumulate-wrap{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.accumulate-status-wrap .accumulate-wrap li{
+    width: 100%;
+    border-radius: 0.4rem;
+    text-align: center;
+    border-right: 1px solid var(--grey-100);
+    padding-right: 1rem;
+}
+.accumulate-status-wrap .accumulate-wrap li:last-child{
+    border: 0;
+    padding-right: 0;
+}
+.accumulate-status-wrap .accumulate-wrap .label{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--grey-400);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.laboratory-dashboard .part-wrap{
+    width: 100%;
+    display: flex;
+}
+.laboratory-dashboard .part-wrap > div .title{
+    width: 10rem;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--grey-500);
+}
+.laboratory-dashboard .by-prd,
+.laboratory-dashboard .by-failure-type{
+    width: 100%;
+    padding: 0 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10rem;
+}
+.laboratory-dashboard .by-prd{
+    border-right: 1px solid var(--grey-100);
+}
+.laboratory-dashboard .list-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+}
+.laboratory-dashboard .list-wrap li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.laboratory-dashboard .list-wrap li .number{
+    font-weight: 700;
+    margin-left: auto;
+    text-align: right;
+}
+.laboratory-dashboard .list-wrap .ranking-num{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--grey-300);
+    color: var(--white);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.laboratory-dashboard .list-wrap .ranking-num.top3{
+    background-color: var(--blue-400);
+}
+.laboratory-dashboard .list-wrap p{
+    font-size: 1.7rem;
+}
+
+.laboratory-dashboard .by-period .flex-cs .line-card{width: calc(50% - 1rem);}
+
+
+
+/* 고객용 대시보드 */
+.customer-dashboard .card-wrap .card:first-child{
+    width: 24rem;
+    flex-grow: 0;
+    align-items: center;
+}
+.customer-dashboard .card-wrap .card:first-child .select-wrap{width: 100%;}
+.customer-dashboard .shop-wrap{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.customer-dashboard .shop-logo{
+    width: 100%;
+    height: 2rem;
+    background: url(../img/shop-logo-sample.png) no-repeat center center;
+    background-size: contain;
+}
+.customer-dashboard .shop-name{
+    font-size: 2rem;
+}
+.customer-dashboard .shop-info{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.customer-dashboard .shop-info p{
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--grey-400);
+}
+.customer-dashboard .update-wrap{
+    width: fit-content;
+    background-color: var(--white);
+    margin-left: auto;
+    margin-bottom: -3rem;
+    border-color: var(--grey-500);
+}
+.customer-dashboard .update-wrap p{
+    font-size: 1.5rem;
+    color: var(--grey-500);
+}
+.customer-dashboard .update-wrap .date-wrap{flex-direction: row;}
+.customer-dashboard .shop-info .indoor::after{
+    display: inline-flex;
+    content: '';
+    width: 1px;
+    height: 10px;
+    background-color: var(--grey-200);
+    margin-left: 0.4rem;
+}
+.customer-dashboard .card{
+    padding: 2rem;
+    justify-content: center;
+}
+.customer-dashboard .card .line-card{
+    min-width: 12rem;
+    flex-grow: 1;
+}
+.customer-dashboard .card .line-card .status{
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.customer-dashboard .card .line-card .status::before{
+    display: inline-flex;
+    content: '';
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+}
+.customer-dashboard .card .line-card .status.on::before{
+    background-color: var(--blue-400);
+}
+.customer-dashboard .card .line-card .status.off::before{
+    background-color: var(--grey-200);
+}
+.customer-dashboard .card .line-card .status .num{
+    font-weight: 700;
+    text-align: right;
+    margin-left: auto;
+}
+.customer-dashboard .card .line-card .label{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--grey-400);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+.customer-dashboard .energy .value{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+.customer-dashboard .energy .value::after{
+    display: inline-flex;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+}
+.customer-dashboard .energy .value.increase::after{
+    border-bottom-color: var(--red);
+    margin-bottom: 6px;
+}
+.customer-dashboard .energy .value.decrease::after{
+    border-top-color: var(--blue-400);
+    margin-top: 4px;
+}
+
+.customer-dashboard .system-status{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-top: 1rem;
+    margin-bottom: 3rem;
+}
+.customer-dashboard .system-status p{
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.layout-area{
+    display: flex;
+}
+.customer-layout .layout-area{gap: 4rem;}
+.customer-dashboard .layout-area.hide,
+.customer-dashboard .by-prd-area.hide{display: none;}
+
+.customer-dashboard .floors-wrap{
+    min-width: 24rem;
+    min-height: 63rem;
+    width: 24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 0;
+    overflow-x: initial;
+}
+.floors{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+.floors li{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+    cursor: pointer;
+}
+.floors li .value{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+.floors li:hover{
+    background: var(--blue-50);
+}
+.floors li.active{
+    background-color: var(--blue-400);
+    color: var(--white);
+}
+.customer-dashboard .floors-wrap .btn-wrap{flex-direction: column;}
+
+.customer-dashboard .prd-btn-wrap{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: auto;
+}
+.customer-dashboard .prd-btn-wrap button{
+    width: 100%;
+    padding: 0 1rem;
+    height: 4rem;
+    border-radius: 0.4rem;
+    color: var(--white);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: relative;
+    font-size: 1.7rem;
+}
+.customer-dashboard .prd-btn-wrap button span{
+    font-weight: 500;
+}
+.customer-dashboard .prd-btn-wrap button .caret-down{
+    margin-left: auto;
+    transition: all 0.5s;
+}
+.customer-dashboard .prd-btn-wrap button.active .caret-down{
+    transform: rotate(-180deg);
+    transition: all 0.5s;
+}
+.customer-dashboard .prd-btn-wrap .fridge-btn{
+    background: var(--red-30);
+    color: var(--red);
+}
+.customer-dashboard .prd-btn-wrap .freezer-btn{
+    background: var(--blue-400-30);
+    color: var(--blue-400);
+}
+.customer-dashboard .prd-btn-wrap button .list{
+    width: inherit;
+    background: var(--white);
+    box-shadow: 0 0 2rem rgba(22, 29, 36, 0.06);
+    position: absolute;
+    left: 0;
+    bottom: 4.4rem;
+    z-index: 89;
+    color: var(--grey-600);
+    padding: 1rem;
+    border-radius: 0.8rem;
+    display: none;
+}
+.customer-dashboard .prd-btn-wrap button.active .list{
+    display: block;
+}
+.customer-dashboard .prd-btn-wrap button .list li{
+    padding: 1rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+    margin-bottom: 1rem;
+    position: relative;
+}
+.customer-dashboard .prd-btn-wrap .fridge-btn .list li:hover{
+    background: var(--red-06);
+    border-color: var(--red-06);
+}
+.customer-dashboard .prd-btn-wrap .freezer-btn .list li:hover{
+    background: var(--blue-400-06);
+    border-color: var(--blue-400-06);
+}
+.customer-dashboard .prd-btn-wrap .fridge-btn .list li.active{
+    background-color: #80554d;
+}
+.customer-dashboard .prd-btn-wrap button .list li.active p:not(.commu-label, .pressure-info p){
+    color: white;
+}
+.customer-dashboard .prd-btn-wrap .freezer-btn .list li.active{
+    background-color: var(--blue-500);
+}
+.customer-dashboard .prd-btn-wrap button .list li p:not(.commu-label){
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+.customer-dashboard .prd-btn-wrap button .list li .prd-name{
+    font-weight: 700;
+}
+
+.customer-dashboard .list .pressure-info{
+    display: none;
+    padding: 1.4rem;
+    border-radius: 0.4rem;
+    background: var(--white);
+    box-shadow: 0 0 2rem rgba(22, 29, 36, 0.06);
+    position: absolute;
+    right: -6rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.customer-dashboard .list .pressure-info.show{
+    display: block;
+}
+.customer-dashboard .pressure-info .value{
+    font-weight: 700;
+    text-align: right;
+}
+
+/* 도면 영역 비율 16:9 / pc최소값 1040x585 / 기본값 1356*630 */
+.canvas-wrap{
+    width: 100%;
+    height: 630px;
+    overflow: auto;
+    position: relative;
+    background:
+		linear-gradient(to bottom, transparent 68px, var(--grey-100) 68px) 0 0 / 100% 69px repeat-y,
+		linear-gradient(to right, transparent 68px, var(--grey-100) 68px) 0 0 / 69px 100% repeat-x
+	    white;
+}
+.canvas-wrap img{width: initial; background-color: var(--white);}
+/* .customer-dashboard .layout-area .canvas-wrap .prd{
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    border-radius: 0.4rem;
+    background-color: var(--blue-400);
+    position: absolute;
+}
+.customer-dashboard .layout-area .canvas-wrap .prd.num12{
+    left: 678px;
+    top: 154px;
+}
+.customer-dashboard .layout-area .canvas-wrap .prd.num13{
+    left: 678px;
+    top: 178px;
+} */
+
+.customer-dashboard .monitoring-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    margin-right: 4rem;
+}
+.customer-dashboard .monitoring-wrap li{
+    width: 9rem;
+    height: 9rem;
+    background-color: var(--blue-700);
+    border: 1px solid var(--blue-700);
+    font-size: 1.5rem;
+    color: var(--white);
+    padding: 1rem;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    position: relative;
+}
+.customer-dashboard .monitoring-wrap li:hover{
+    background-color: var(--blue-400);
+    border-color: var(--blue-400);
+}
+.customer-dashboard .monitoring-wrap li .num{
+    font-size: 2.6rem;
+    font-weight: 700;
+}
+.customer-dashboard .monitoring-wrap li.floor-plan{
+    border-color: var(--grey-200);
+    background-color: var(--white);
+    color: var(--grey-600);
+    margin-top: auto;
+}
+.customer-dashboard .monitoring-wrap li.floor-plan:hover{
+    background-color: var(--blue-50);
+}
+
+.customer-dashboard .monitoring-wrap .system-status-info{
+    width: 20rem;
+    padding: 1.4rem;
+    background-color: var(--white);
+    box-shadow: 0 0 2rem rgba(22, 29, 36, 0.16);
+    border-radius: 0.4rem;
+    position: absolute;
+    left: 10rem;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    display: none;
+}
+.customer-dashboard .monitoring-wrap .system-status-info.show{display: flex;}
+.customer-dashboard .monitoring-wrap .system-status-info > div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.customer-dashboard .monitoring-wrap .system-status-info .prd-num{
+    color: var(--grey-600);
+    font-weight: 700;
+}
+
+
+/* 고객용 대시보드 레이아웃 설정 */
+.customer-layout .page-title span::before{
+    display: inline-flex;
+    content: '|';
+    color: var(--grey-100);
+    margin-right: 1rem;
+}
+.customer-layout .setting-wrap{
+    width: 20rem;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+.customer-layout .floors li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    position: relative;
+}
+.customer-layout .floors li .input-wrap{min-width: initial;}
+.customer-layout .floors li .input-wrap,
+.customer-layout .floors li .delete-btn,
+.customer-layout .floors li .edit-btn{
+    display: none;
+}
+.customer-layout .floors li .edit-btn{
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.customer-layout .floors li:hover .edit-btn{display: block;}
+.customer-layout .floors li.focus{
+    border-color: var(--blue-400);
+}
+.customer-layout .floors li.focus .input-wrap,
+.customer-layout .floors li.focus .delete-btn{display: block;}
+
+.customer-layout .box{
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.customer-layout .box > div{
+    height: fit-content;
+    padding: 2rem;
+    border-radius: 0.4rem;
+    background-color: var(--grey-50);
+}
+
+.customer-layout .guide-wrap{
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+    color: var(--grey-400);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.customer-layout .canvas-area{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+}
+.customer-layout .canvas-area .btn-wrap{justify-content: space-between;}
+.customer-layout .canvas-wrap{
+    border: 1px solid var(--grey-100);
+}
+
+.customer-layout .prd-info-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    border: 1px solid var(--grey-100);
+    gap: 1rem;
+}
+.customer-layout .prd-info-wrap .input-wrap{
+    min-width: 8rem;
+    width: 8rem;
+}
+.customer-layout .prd-info-wrap p{
+    font-size: 1.7rem;
+}
+.customer-layout .prd-info-wrap p.label{
+    font-weight: 500;
+}
+
+#prd-not-place{
+    width: initial;
+    min-height: initial;
+    background-color: transparent;
+    position: initial;
+}
+#prd-not-place .popup-wrap{
+    min-width: 34rem;
+    box-shadow: 0 0 2rem rgba(22, 29, 36, 0.16);
+    position: absolute;
+    top: 50%;
+    left: 30rem;
+    transform: translateY(-50%);
+    overflow: hidden;
+}
+#prd-not-place .prd-list-wrap{
+    max-height: 34rem;
+}
+#prd-not-place .prd-name{
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+}
+#prd-not-place .prd-code{
+    font-size: 1.5rem;
+    color: var(--grey-300);
+}
+
+
+
+/* 모니터링 지역별 */
+.monitoring_by-region{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.monitoring_by-region > div:not(.side-layer){
+    position: absolute;
+}
+.monitoring_by-region .map-wrap{
+    width: calc(100% + 8rem);
+    height: calc(100% + 8rem);
+    top: -4rem;
+    left: -4rem;
+    z-index: 0;
+}
+.monitoring_by-region .info-area{
+    max-width: 46rem;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.monitoring_by-region .total-wrap{
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+.monitoring_by-region .total-wrap .value-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.monitoring_by-region .total-wrap .value-wrap .num-wrap{
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.monitoring_by-region .total-wrap p{
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 0.2rem;
+}
+.monitoring_by-region .total-wrap .value-wrap .num-wrap p.alarm-num{
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--blue-400);
+}
+.monitoring_by-region .total-wrap .value-wrap .num-wrap p.all-num{
+    font-size: 1.7rem;
+    color: var(--grey-400);
+    display: flex;
+    align-items: center;
+}
+.monitoring_by-region .total-wrap .value-wrap .num-wrap p.all-num::before{
+    display: inline-flex;
+    content: '/';
+    margin-right: 0.4rem;
+}
+
+.monitoring_by-region .filter-wrap{
+    border-radius: 0.4rem;
+    padding: 2rem;
+    background-color: var(--blue-50);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-x: hidden;
+    display: none;
+}
+.monitoring_by-region .filter-wrap.show{display: flex;}
+.monitoring_by-region .filter-wrap .btn-wrap{
+    width: 100%;
+    overflow-x: auto;
+}
+.monitoring_by-region .filter-wrap .btn-wrap .btn{
+    border-color: var(--grey-200);
+    color: var(--grey-400);
+}
+.monitoring_by-region .filter-wrap .btn-wrap .btn.active{
+    background-color: var(--blue-100);
+    border-color: var(--blue-500);
+    color: var(--blue-500);
+}
+.monitoring_by-region .system-alarm-info{
+    flex-direction: row;
+    gap: 2rem;
+}
+.monitoring_by-region .system-alarm-info > div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.monitoring_by-region .system-alarm-info > div p{
+    display: flex;
+    align-items: center;
+}
+.monitoring_by-region .system-alarm-info > div p .num{
+    margin-left: 1rem;
+    font-weight: 700;
+}
+.monitoring_by-region .info-btn{
+    position: absolute;
+    background-color: var(--white);
+    box-shadow: 0 0 20px rgba(22, 29, 36, 0.16);
+}
+.monitoring_by-region .btn.close{
+    background-color: var(--white);
+    box-shadow: 0 0 20px rgba(22, 29, 36, 0.16);
+    margin: 2rem auto 0;
+}
+
+
+/* 모니터링 매장별 */
+.monitoring_by-shop .search-aggr-info-wrap{
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+.monitoring_by-shop .search-aggr-info-wrap .status-item{
+    border-radius: 0.4rem;
+    padding: 2rem;
+    border: 1px solid var(--grey-100);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+.monitoring_by-shop .search-aggr-info-wrap .connect-prd{
+    display: flex;
+    align-items: flex-start;
+}
+.monitoring_by-shop .search-aggr-info-wrap .connect-prd .flex-cs > div{
+    width: 50%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+}
+.monitoring_by-shop .search-aggr-info-wrap .connect-prd .flex-cs .label{margin-bottom: 0;}
+
+.customer-layout .prd{
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    border-radius: 0.4rem;
+    font-size: 1.5rem;
+    color: var(--grey-400);
+    font-weight: 700;
+}
+.customer-layout .prd.mint{
+    border: 2px solid var(--mint-200);
+    background-color: var(--mint-100);
+    top: 10px;
+    left: 10px;
+}
+.customer-layout .prd.grey{
+    top: 100px;
+    left: 10px;
+    background-color: var(--grey-200);
+    border: 2px solid var(--mint-400);
+}
+
+
+/* 원격제어 */
+.remote-control .line-card.lookup{
+    width: 40%;
+}
+.remote-control .line-card.lookup .btn-wrap button{height: 100%;}
+.remote-control .line-card .list-oper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--grey-100);
+    margin-bottom: 1rem;
+}
+.remote-control .list-wrap li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
+}
+.remote-control .list-wrap li.active{
+    background-color: var(--blue-25);
+}
+.remote-control .list-wrap .list-content{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+.remote-control .list-wrap .option-wrap{
+    display: flex;
+}
+.remote-control .list-wrap .list-content .group-name,
+.remote-control .list-wrap .list-content .prd-name{
+    font-size: 1.7rem;
+}
+.remote-control .list-wrap li .name-wrap{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    text-align: left;
+}
+.remote-control .list-wrap .status{
+    width: 9.6rem;
+    font-size: 1.5rem;
+    color: var(--grey-400);
+}
+.remote-control .list-wrap .temperature{
+    width: 9rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--blue-400);
+}
+.remote-control .list-wrap .prd-code,
+#prd-group-popup .prd-list-wrap li p.prd-code{
+    font-size: 1.5rem;
+    color: var(--grey-400);
+}
+
+#prd-group-popup .group-name.hide{display: none;}
+#prd-group-popup .edit-wrap{display: none;}
+#prd-group-popup .edit-wrap.show{display: flex;}
+#prd-group-popup .prd-list-wrap{
+    width: 100%;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+    padding: 0 1.2rem;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+#prd-group-popup .prd-list-wrap li{
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--grey-100);
+}
+#prd-group-popup .prd-list-wrap li:last-child{border: 0;}
+#prd-group-popup .prd-list-wrap li .checkbox{margin-top: 0.4rem;}
+#prd-group-popup .prd-list-wrap li .prd-info{flex-grow: 1;}
+#prd-group-popup .prd-list-wrap li p{
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+}
+#prd-group-popup .prd-list-wrap li.individual .prd-name::after{
+    display: block;
+    content: '개별';
+    font-size: 1.2rem;
+    margin-left: 0.6rem;
+    padding: 0 0.6rem;
+    border-radius: 0.4rem;
+    color: var(--mint-500);
+    font-weight: 500;
+    background-color: var(--mint-100);
+}
+
+/* 원격제어 팝업 */
+@keyframes sideLayerHideIndoor{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(188rem);
+    }
+}
+@keyframes sideLayerHideOutdoor{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(72rem);
+    }
+}
+
+#indoor-control.hide{
+    animation: sideLayerHideIndoor 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+#outdoor-control.hide{
+    animation: sideLayerHideOutdoor 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+.side-layer.control{
+    max-width: 98%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: 2rem 0;
+}
+.side-layer.control .popup-content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 4rem 0;
+}
+.side-layer.control .popup-content > div{
+    width: 36rem;
+    padding: 0 2rem;
+}
+.side-layer.control .popup-content .side-title button{
+    position: initial;
+    margin-right: 1rem;
+}
+.side-layer.control .side-title{
+    justify-content: flex-start;
+    margin-bottom: 0;
+}
+.side-layer.control ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.side-layer.control ul li{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.7rem;
+}
+.side-layer.control ul li .label{color: var(--grey-500);}
+.side-layer.control .card{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.side-layer.control .card .box{flex-grow: 1;}
+.side-layer.control .card .box p{text-align: center;}
+.side-layer.control .card .label{font-size: 1.5rem;}
+.side-layer.control .card .value{font-size: 2.0rem; color: var(--grey-300); margin-bottom: 1rem;}
+.side-layer.control .card.flex-cs .value{margin-bottom: 0;}
+.side-layer.control .card .value.on{color: var(--mint-400);}
+.side-layer.control .card .box .icon{margin: 0 auto;}
+
+.side-layer.control form .input-wrap{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.side-layer.control form .input-label{
+    font-size: 1.7rem;
+    width: 10.6rem;
+}
+.side-layer.control .flex-wrap .input-label{width: 100%;}
+.side-layer.control .mix-wrap{
+    flex-direction: row;
+}
+.side-layer.control .btn-wrap{justify-content: space-between;}
+.side-layer.control .sub-tit{
+    font-size: 1.5rem;
+    color: var(--grey-400);
+}
+.side-layer.control .prd-list{
+    padding: 1rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+}
+.side-layer.control .prd-list li{
+    flex-direction: column;
+    gap: 0.4rem;
+    border-bottom: 1px solid var(--grey-100);
+    padding-bottom: 1rem;
+}
+.side-layer.control .prd-list li:last-child{
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+.side-layer.control .prd-list p{
+    font-size: 1.5rem;
+}
+.side-layer.control .prd-list .active p{color: var(--blue-400);}
+.side-layer.control .prd-list .prd-code{
+    font-size: 1.2rem;
+    color: var(--grey-400);
+}
+.side-layer.control .el-input--large{
+    flex-shrink: 0;
+}
+
+
+/* AS 상세내역 */
+.AS-receipt-detail .table-area,
+.service-progress-info .table-area{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+.AS-receipt-detail .part-wrap,
+.service-progress-info .part-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+
+/* 처리 가이드 */
+.process-guide .search-wrap{
+    min-width: 20rem;
+    flex: 6;
+    flex-shrink: 0;
+}
+
+
+/* 제품 분석 */
+.year-status{
+    min-width: 20rem;
+    padding: 2rem;
+    border-radius: 0.4rem;
+    background-color: var(--grey-50);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+}
+.year-status .txt-wrap{
+    justify-content: space-between;
+}
+.year-status p{
+    font-size: 1.7rem;
+    color: var(--grey-500);
+}
+.year-status .txt-wrap.label p{color: var(--grey-300);}
+.year-status .percent{color: var(--blue-500);}
+.prd-analyze .line-card-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.prd-analyze .line-card{
+    min-width: 30rem;
+    flex-grow: 1;
+}
+
+
+.prd-analyze form{
+    height: calc(100% - 14rem);
+    overflow-y: auto;
+}
+.prd-analyze form > div{
+    width: calc(100% - 2px);
+    margin-left: 1px;
+}
+.prd-analyze form > div:first-child{
+    padding-top: 1px;
+}
+.prd-analyze form > div:last-child{
+    padding-bottom: 1px;
+}
+
+
+/* 알림 분석 */
+.line-card.alarm-type{
+    min-width: 16rem;
+    width: 16rem;
+}
+.line-card.alarm-type h2,
+.line-card.alarm-type h4{text-align: center;}
+.ranking-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+}
+
+
+/* 설치 분석 */
+.install-analyze .line-card{
+    width: calc(50% - 1rem);
+    flex-grow: 1;
+}
+
+/* 주요부품 분석 */
+.parts-analyze .prd-wrap{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+    gap: 2rem;
+}
+.parts-analyze .prd-wrap li{
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+.parts-analyze .prd-wrap li .prd-name{
+    font-size: 2.0rem;
+    font-weight: 500;
+}
+.parts-analyze .prd-wrap li .txt-wrap{
+    font-size: 1.7rem;
+}
+.parts-analyze .prd-wrap li .txt-wrap .parts{
+    color: var(--grey-400);
+}
+.parts-analyze .prd-wrap li .bar{
+    width: 100%;
+    height: 2rem;
+    border-radius: 10rem;
+    background-color: var(--grey-50);
+    margin-bottom: 0.4rem;
+    position: relative;
+}
+.parts-analyze .prd-wrap li .bar::after{
+    display: block;
+    content: '';
+    width: 30%;
+    height: inherit;
+    border-radius: 10rem;
+    background-color: var(--mint-400);
+}
+.parts-analyze .prd-wrap li .bar-wrap p{
+    font-size: 1.5rem;
+    color: var(--grey-400);
+}
+
+
+/* 에너지 사용량 분석 */
+.energy-analyze .filter-area{
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+.energy-analyze .filter-area .select-group{
+    align-items: center;
+}
+.energy-analyze .filter-area .radio-wrap{
+    flex-grow: 0;
+    margin-left: auto;
+}
+
+
+
+/* 제품 정보 */
+.prd-info .toggle-wrap{
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.prd-info .toggle-wrap li{
+    width: calc((100% / 4) - 1.5rem);
+    min-width: 28rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+.prd-info .toggle-wrap li.active{
+    background-color: var(--blue-25);
+    border-color: var(--blue-200);
+}
+.prd-info .toggle-wrap li .label{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--grey-400);
+}
+
+
+
+/* 설치 실명제 */
+.install-person .card-wrap{
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.install-person section.card{
+    width: calc(100% / 3);
+}
+.install-person .btn.filled{
+    height: initial;
+    padding: 1rem;
+    align-self: center;
+    display: block;
+    text-align: center;
+}
+.install-person .btn.filled .icon{
+    transform: rotate(180deg);
+    margin: 0 auto 0.4rem auto;
+}
+.install-person .table-area .radio-wrap{flex-grow: 0;}
+
+#install-person-popup .mix-wrap .select-wrap + .btn-wrap button{
+    min-width: 5.2rem;
+}
+
+
+/* 펌웨어 관리 */
+.popup.firmware h4{word-break: keep-all;}
+.popup.firmware .list-wrap{
+    padding: 1rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--grey-100);
+    max-height: 20rem;
+    overflow-y: auto;
+}
+.popup.firmware li{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.4rem 0.4rem;
+    gap: 2rem;
+    border-bottom: 1px solid var(--grey-100);
+}
+.popup.firmware li:first-child{padding-top: 0.4rem;}
+.popup.firmware li:last-child{border-bottom: 0; padding-bottom: 0.4rem;}
+.popup.firmware li .file-wrap{
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 0.4rem;
+    background-color: var(--blue-25);
+}
+.popup.firmware li .btn-wrap button:hover .icon{
+    filter: invert(39%) sepia(15%) saturate(6082%) hue-rotate(203deg) brightness(85%) contrast(79%);
+}
+
+#firmwrare-update-popup .list-wrap{max-height: 46rem;}
+
+
+
+/* 제품별 계산 */
+.calc-pg .card > .flex-cc .box{
+    width: 30rem;
+}
+.calc-pg .card > .flex-cc .line-card{
+    width: 44rem;
+}
+.calc-pg .filter-value{
+    padding: 1rem 2rem;
+    border-radius: 0.4rem;
+    background-color: var(--blue-25);
+    font-size: 1.7rem;
+    color: var(--blue-400);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.calc-pg form .unit{
+    font-size: 1.7rem;
+    flex-shrink: 0;
+}
+.calc-pg form .calc-btn{
+    width: fit-content;
+    margin: 0 auto;
+}
+.calc-pg .value-wrap{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 4rem;
+}
+.calc-pg .value-wrap p{
+    font-size: 1.7rem;
+}
+.calc-pg .value-wrap .value{
+    font-size: 4.8rem;
+    font-weight: 700;
+    color: var(--mint-400);
+}
+.calc-pg .notice{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    background-color: var(--grey-50);
+}
+.calc-pg .notice p{
+    font-size: 1.2rem;
+    color: var(--grey-400);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.calc-pg .notice p::before{
+    content: '-';
+    margin-right: 0.4rem;
+    align-self: flex-start;
+}
+.calc-pg .notice p a{
+    font-weight: 500;
+    color: var(--blue-400);
+}
+
+
+
+
+/* -- 반응형 노트북 -- */
+@media screen and (max-width: 1465px){
+    /* 딜러용 대시보드 */
+    .dealer-dashboard .current-status-area{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .dealer-dashboard .current-status-area .card-wrap{
+        width: 100%;
+    }
+    .dealer-dashboard .current-status-area .btn-wrap{
+        margin-left: auto;
+    }
+    .tab-contents.alarm .current-status-area .card-wrap:first-child::after{display: none;}
+    
+    /* 서비스 대시보드 */
+    .service-dashboard .card-wrap{
+        flex-wrap: wrap;
+    }
+    .service-dashboard .filter-area{
+        flex-wrap: wrap;
+    }
+    .service-dashboard .filter-area button{
+        margin-left: auto;
+    }
+
+    /* 연구소 대시보드 */
+    .accumulate-status-wrap .all-accmulate,
+    .accumulate-status-wrap .month-accmulate{
+        flex-wrap: wrap;
+    }
+
+    /* 제품 분석 */
+    .prd-analyze .flex-stretch{
+        flex-wrap: wrap;
+    }
+    .prd-analyze .flex-stretch .year-status{
+        width: 100%;
+    }
+
+    /* 설치 분석 */
+    .install-analyze .line-card{
+        width: 100%;
+    }
+
+    /* 제품 정보 */
+    .prd-list-detail .prd-content{
+        flex-direction: column;
+    }
+}
+
+/* -- 반응형 노트북, 태블릿 가로 -- */
+@media screen and (max-width: 1280px){
+    /* 권한별 메뉴관리 */
+    .authority-menu-manage .card.group-menu-manage .table-area .flex-eb{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .authority-menu-manage .card.group-menu-manage .table-area .flex-eb .flex-cs.gap-14,
+    .authority-menu-manage .card.group-menu-manage .table-area .flex-eb .ml-auto{width: 100%;}
+
+    .authority-menu-manage .card.group-menu-manage .table-area .flex-eb .flex-cs.gap-10,
+    .authority-menu-manage .menu-copy-wrap{flex-grow: 1;}
+
+    .authority-menu-manage .card.group-menu-manage .table-area .flex-eb .flex-cs.gap-14{
+        gap: 4rem;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+    .authority-menu-manage .card.group-menu-manage .table-area .flex-eb .ml-auto{
+        margin-left: 0;
+        justify-content: flex-start;
+        gap: 4rem;
+        justify-content: space-between;
+    }
+
+    .authority-menu-manage .el-radio-group{width: fit-content;}
+
+    /* 레이아웃 */
+    .layout-area{
+        flex-direction: column;
+        gap: 4rem;
+    }
+    .customer-dashboard .monitoring-wrap{
+        flex-direction: row;
+        padding: 2rem 0;
+        margin-right: 0;
+    }
+    .customer-dashboard .monitoring-wrap li.floor-plan{
+        margin-top: initial;
+        margin-left: auto;
+    }
+    .customer-dashboard .floors-wrap,
+    .customer-layout .setting-wrap{width: 100%;}
+    .customer-layout .floors li.focus .input-wrap{flex-grow: 1;}
+    .customer-layout .box > div{
+        margin: 0;
+    }
+
+
+    /* 연구소 대시보드 */
+    .laboratory-dashboard .part-wrap{
+        flex-direction: column;
+    }
+    .laboratory-dashboard .by-prd, .laboratory-dashboard .by-failure-type{
+        padding: 4rem 6rem;
+    }
+    .laboratory-dashboard .by-prd{
+        border: 0;
+        border-bottom: 1px solid var(--grey-100);
+    }
+
+    /* 원격 제어 */
+    .remote-control .card .flex-stretch{
+        flex-direction: column;
+    }
+    .remote-control .line-card.lookup{width: 100%;}
+}
+
+
+
+/* -- 반응형 태블릿 세로 -- */
+@media screen and (max-width: 980px){
+    /* 로그인 */
+    .login .landing-wrap{display: none;}
+
+    /* 내 정보 관리 */
+    .my-info .card .flex-ss{
+        display: flex;
+        flex-direction: column;
+    }
+    .my-info .card .table,
+    .my-info .card .my-info-edit{width: 100%;}
+
+
+    /* 권한별 메뉴관리 */
+    .authority-menu-manage .table-area .flex-eb{
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .authority-menu-manage .table-area .flex-eb .flex-cs.gap-14{
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .authority-menu-manage .table-area .flex-eb .flex-cs.gap-10{flex-grow: 1;}
+    .authority-menu-manage .table-area .flex-eb .ml-auto{
+        width: 100%;
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+
+    /* 딜러용 대시보드 */
+    .dealer-dashboard .filter-area{
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+    .dealer-dashboard .filter-area .radio-wrap{
+        margin-left: auto;
+        width: 100%;
+    }
+    .dealer-dashboard .filter-area .select-group{width: 100%;}
+    .dealer-dashboard .current-status-area .card-wrap{
+        flex-wrap: wrap;
+    }
+    .dealer-dashboard .current-status-area .card-wrap .card{
+        width: initial;
+        flex-grow: 1;
+    }
+
+    /* 연구소 대시보드 */
+    .accumulate-status-wrap{flex-direction: column;}
+    .accumulate-status-wrap .all-accmulate, .accumulate-status-wrap .month-accmulate{width: 100%;}
+    .accumulate-status-wrap button,
+    .laboratory-dashboard .by-period .flex-cs .line-card{width: 100%;}
+    .laboratory-dashboard .by-period .flex-cs{flex-wrap: wrap;}
+    .laboratory-dashboard .by-prd, .laboratory-dashboard .by-failure-type{gap: 4rem;}
+
+    /* 알림 상세 */
+    .alarm-content{
+        flex-direction: column;
+    }
+
+    /* 원격 제어 */
+    .remote-control .list-wrap .list-content{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .remote-control .list-wrap .list-content .option-wrap{
+        width: 100%;
+        gap: 1rem;
+    }
+    .remote-control .list-wrap .list-content .option-wrap > div{
+        width: initial;
+    }
+    .remote-control .list-wrap .list-content .option-wrap button{margin-left: auto;}
+
+    .AS-receipt-detail .table-area,
+    .service-progress-info .table-area{
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    /* 주요부품 분석 */
+    .parts-analyze .prd-wrap{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* 에너지 사용량 분석 */
+    .energy-analyze .filter-area,
+    .energy-analyze .filter-area > .flex-cs,
+    .energy-analyze .filter-area .select-group{
+        flex-direction: column;
+        width: 100%;
+    }
+    .energy-analyze .filter-area .select-wrap,
+    .energy-analyze .btn-wrap,
+    .energy-analyze .btn-wrap button{
+        width: 100%;
+    }
+    .energy-analyze .filter-area .radio-wrap{
+        flex-grow: 0;
+        margin-left: auto;
+    }
+
+
+    /* 설치 실명제 */
+    .install-person .card-wrap{
+        flex-direction: column;
+    }
+    .install-person .card-wrap .card{
+        width: 100%;
+    }
+    .install-person .btn.filled .icon{
+        transform: rotate(-90deg);
+    }
+
+    /* 제품별 계산 */
+    .calc-pg .card > .flex-cc{
+        flex-direction: column;
+    }
+}
+
+/* -- 반응형 모바일 -- */
+@media screen and (max-width: 600px){
+    .login{padding: 1.6rem;}
+    .filter-area,
+    .authority-menu-manage .table-area .flex-eb .flex-cs.gap-14,
+    .laboratory-dashboard .by-prd, .laboratory-dashboard .by-failure-type,
+    .monitoring_by-shop .search-aggr-info-wrap,
+    .alarm-list-detail .prd-card .btn-wrap,
+    .alarm-list-detail .table-area .flex-cs > .flex-cs,
+    .alarm-list-detail .table-area .flex-cs > .flex-cs .btn-wrap{
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .table-area .flex-eb{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    /* width 100% */
+    .filter-area .select-wrap,
+    .filter-area .btn-wrap button,
+    .filter-area .select-group button,
+    .table-area .flex-eb > div,
+    .customer-dashboard .energy .line-card,
+    .customer-dashboard .by-prd-area .btn-wrap,
+    .monitoring_by-shop .search-aggr-info-wrap .connect-prd .flex-cs > div,
+    .alarm-list-detail .table-area .flex-cs .flex-cs .radio-wrap,
+    .alarm-list-detail .table-area .flex-cs .flex-cs .btn-wrap button,
+    .energy-analyze .filter-area .radio-wrap,
+    .popup.firmware .input-wrap .filled{width: 100%;}
+
+    .table-area .flex-ce{justify-content: flex-start;}
+
+    .table-area .flex-ce .select-wrap,
+    .customer-dashboard > .card-wrap > .card:first-child{flex-grow: 1;}
+
+    .alarm-list .filter-area button,
+    .monitoring_by-shop .filter-area button,
+    .remote-control .line-card.lookup .btn-wrap button,
+    .service-history .filter-area button,
+    .process-guide .filter-area button,
+    .alarm-analyze .filter-area button,
+    .monitoring-analyze .filter-area button,
+    .prd-info .filter-area button,
+    .install-person .filter-area button,
+    .diagnosis-guide .filter-area button{height: 4.6rem;}
+
+    .customer-dashboard .by-prd-area .flex-cb{
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .my-info .card .table{min-width: initial;}
+    .my-info .card .my-info-edit{padding: 3rem;}
+
+    .customer-dashboard .energy .flex-cs,
+    #as-reception .chk-wrap .flex-cs,
+    .alarm-list-detail .table-area .flex-cs .txt-wrap{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .customer-dashboard .energy .txt-wrap .value{margin-left: 0;}
+
+    .dealer-dashboard .current-status-area .card-wrap{
+        gap: 1rem;
+        align-items: stretch;
+    }
+    .tab-contents.install .current-status-area .card-wrap .card{
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .tab-contents.install .current-status-area .card-wrap .card .label{
+        text-align: center;
+    }
+    .tab-contents.alarm .current-status-area .card-wrap{flex-direction: column;}
+    .tab-contents.alarm .current-status-area .card-wrap .card{width: 100%;}
+    .tab-contents.alarm .current-status-area .card-wrap .icon.caret-right{
+        margin: 0 auto;
+        transform: rotate(90deg);
+    }
+    .tab-contents.alarm .current-status-area .card-wrap:first-child::after{
+        display: block;
+        width: 100%;
+        height: 1px;
+        margin: 0;
+        margin-top: 1rem;
+    }
+
+    .side-layer.alarm .prd-info-wrap li{
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .side-layer.alarm .system-label{flex-direction: row;}
+    .monitoring_by-shop .search-aggr-info-wrap .connect-prd .flex-cs{
+        flex-direction: column;
+    }
+
+    .popup-content .map-wrap{overflow-x: auto;}
+
+    .monitoring_by-region .info-area{
+        max-width: 100%;
+        display: none;
+    }
+    .monitoring_by-region .info-area.show{
+        display: block;
+        animation: fadeInDown 0.5s;
+    }
+    .monitoring_by-region .info-area.show + .info-btn{display: none !important;}
+    .monitoring_by-region .map-wrap{
+        width: calc(100% + 3.2rem);
+        height: calc(100% + 3.2rem);
+        top: -1.6rem;
+        left: -1.6rem;
+    }
+    .monitoring_by-region .total-wrap .value-wrap{
+        gap: 0;
+    }
+
+    .alarm-list-detail .prd-card,
+    .prd-card ul.prd-info{min-width: initial;}
+    .alarm-list-detail .alarm-info-wrap{gap: 1.4rem;}
+    .alarm-list-detail .alarm-info-wrap .btn-wrap,
+    .alarm-list-detail .table-area button{
+        margin-left: 0;
+        width: 100%;
+    }
+    .alarm-list-detail .alarm-info-wrap .btn-wrap button{width: 50%;}
+    .alarm-list-detail .table-area > .flex-cs{
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .remote-control .list-wrap .list-content .option-wrap{
+        width: 100%;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    .side-layer.control{
+        max-width: initial;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .side-layer.control .popup-content{
+        flex-wrap: nowrap;
+    }
+    .side-layer.control .popup-content > div{width: 100%;}
+    .side-layer.control .popup-content > div:last-child{padding-bottom: 2rem;}
+    
+    .general-inquiry .table-area .flex-eb{
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    /* 주요부품 분석 */
+    .parts-analyze .prd-wrap{
+        grid-template-columns: 1fr;
+    }
+
+    /* 펌웨어 관리 */
+    .popup.firmware .list-wrap li .btn-wrap{
+        width: 100%;
+        margin-left: 0;
+    }
+    .popup.firmware .list-wrap li .btn-wrap button{
+        height: 4rem;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        padding: 0 1rem;
+        border-radius: 0.4rem;
+        border: 1px solid var(--grey-100);
+    }
+
+    /* 제품별 계산 */
+    .calc-pg .card > .flex-cc .box,
+    .calc-pg .card > .flex-cc .line-card{
+        width: 100%;
+    }
+}

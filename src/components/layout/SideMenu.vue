@@ -143,6 +143,7 @@ const currentMenu = ref(null) // store에 담긴 메뉴
  * 현재 라우터에 대한 메뉴를 세팅해준다.
  */
 onBeforeMount(() => {
+    return;
     currentMenu.value = store.getters['commonRefresh/getCurrentMenu']
 
     //화면 사이즈가 변경될 때
