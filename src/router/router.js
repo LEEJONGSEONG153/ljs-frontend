@@ -15,11 +15,11 @@ const router = createRouter({
   routes: [
     { path: "/", name:"defaultLayout", redirect:"/main", component: () => import("@/views/DefaultLayout.vue"),
       children: [
-        { path: "main", name:"main", component: () => import("@/views/DefaultLayout.vue"), beforeEnter: checkPermission }
+        { path: "main", name:"main", component: () => import("@/views/main/Main.vue"), beforeEnter: checkPermission }
 
       ]
     },
-    { path: "/login", name:"login", component: () => import("@/views/login/login.vue")}
+    { path: "/login", name:"login", component: () => import("@/views/login/Login.vue")}
   ]
 });
 

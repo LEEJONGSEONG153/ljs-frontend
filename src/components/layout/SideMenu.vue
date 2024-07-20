@@ -9,11 +9,11 @@
 
                 <!-- PC 버전 1뎁스메뉴 -->
                 <ul>
-                    <li v-for="(item, index) in mainMenuList" :key="index" :class="selectedMainMenu === item.menuCode && 'active'" @click="handleActiveMainMenu(item.menuCode)" >
+                    <li v-for="(item, index) in mainMenuList" :key="index" :class="selectedMainMenu === item.menuCd && 'active'" @click="handleActiveMainMenu(item.menuCd)" >
                         
                         <router-link to="">
-                            <span class="icon" :class="item.icon" >{{item.menuCode }} {{ item.menuName }}</span>
-                            {{ item.menuName}}
+                            <span class="icon" :class="item.icon" >{{item.menuCd }} {{ item.menuNm }}</span>
+                            {{ item.menuNm}}
                         </router-link>
                     </li>
                 </ul>
@@ -25,10 +25,10 @@
             <div class="sub-category" :class="{'fixed' : isSideMenuToggle }">
 
                 <div v-for="(depth2, i) in subMenuList" :key="i" class="depth-wrap">
-                    <p class="group-title">{{ depth2.menuName }}</p>
+                    <p class="group-title">{{ depth2.menuNm }}</p>
                     <ul>
-                        <li v-for="(depth3, j) in depth2[depth2.menuCode]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.siteUrl && 'active'">
-                            <router-link :to="depth3.siteUrl">{{ depth3.menuName}}</router-link>
+                        <li v-for="(depth3, j) in depth2[depth2.menuCd]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.siteUrl && 'active'">
+                            <router-link :to="depth3.siteUrl">{{ depth3.menuNm}}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -84,11 +84,11 @@
                 <div class="nav-menu">
                     <div class="main-category">
                         <ul>
-                            <li v-for="(item, index) in mainMenuList" :key="index" :class="selectedMainMenu === item.menuCode && 'active'" @click="handleActiveMainMenu(item.menuCode)" >
+                            <li v-for="(item, index) in mainMenuList" :key="index" :class="selectedMainMenu === item.menuCd && 'active'" @click="handleActiveMainMenu(item.menuCd)" >
                                 
                                 <router-link to="">
-                                    <span class="icon" :class="item.icon" >{{item.menuCode }} {{ item.menuName }}</span>
-                                    {{ item.menuName}}
+                                    <span class="icon" :class="item.icon" >{{item.menuCd }} {{ item.menuNm }}</span>
+                                    {{ item.menuNm}}
                                 </router-link>
                             </li>
                         </ul>
@@ -98,10 +98,10 @@
                     <div class="sub-category" :class="{'fixed' : isSideMenuToggle }">
 
                         <div v-for="(depth2, i) in subMenuList" :key="i" class="depth-wrap">
-                            <p class="group-title">{{ depth2.menuName }}</p>
+                            <p class="group-title">{{ depth2.menuNm }}</p>
                             <ul>
-                                <li v-for="(depth3, j) in depth2[depth2.menuCode]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.siteUrl && 'active'">
-                                    <router-link :to="depth3.siteUrl">{{ depth3.menuName}}</router-link>
+                                <li v-for="(depth3, j) in depth2[depth2.menuCd]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.siteUrl && 'active'">
+                                    <router-link :to="depth3.siteUrl">{{ depth3.menuNm}}</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -139,11 +139,49 @@ const selectedMainMenu = ref(null) // 선택한 메인 메뉴
 const selectedSubMenu = ref(null) // 선택한 서브 메뉴
 const currentMenu = ref(null) // store에 담긴 메뉴
 
+
+import menuApi from '@/apis/menuApi'
 /**
  * 현재 라우터에 대한 메뉴를 세팅해준다.
  */
-onBeforeMount(() => {
+onBeforeMount( async() => {
+
+    let menuList2 = await menuApi.getMenuList();
+    menuList2 = menuList2.data;
+    mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == 'Y') //첫번째 계층의 메뉴 목록
+
+    //if(store.state.login.userInfo.siteGroupId){
+        // const menuList = store.state.login.menuList
+            
+            mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == 'Y') //첫번째 계층의 메뉴 목록
+
+            //const selectedMenu = menuList2.filter((item) => item.siteUrl === currentMenu.value) //선택된 메뉴의 menuCode를 추출해오기 위함
+            const selectedMenu = menuList2[3];
+            
+            // ** 선택된 메뉴의 최상위인 메인 메뉴의 active 설정 **
+            // 해당 메뉴가 최상위가 아닌 경우
+            if(selectedMenu.length > 0 ){ 
+                if(selectedMenu[0].parentMenuCd){
+                    const parentMenu = menuList2.filter((item) => item.menuCd == selectedMenu[0].parentMenuCd) // 상위 메뉴 추출
+                    //또 다른 상위 메뉴가 있는 경우 최상위 메뉴 추출
+                    if(parentMenu.length > 0 ){ 
+                        if(parentMenu[0].parentMenuCd){
+                            const grandParent = menuList2.filter((item) => item.menuCd == parentMenu[0].parentMenuCd) 
+                            selectedMainMenu.value = grandParent[0].menuCd // main menu active 
+                        }
+                        
+                    }
+                }else{
+                    // 부모 메뉴가 없는 최상위 메뉴 라우터의 경우
+                    selectedMainMenu.value = selectedMenu[0].menuCd // main menu active
+                }
+            }
+  //  }
+
+    
     return;
+
+
     currentMenu.value = store.getters['commonRefresh/getCurrentMenu']
 
     //화면 사이즈가 변경될 때

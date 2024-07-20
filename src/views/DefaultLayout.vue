@@ -1,10 +1,10 @@
 <template>
     <div class="page"  @click="closeMyInfoPopup">
         <!--사이드메뉴 -->
-        <side-menu  :isSideMenuToggle="isSideMenuToggle" @handleIsToggle="handleIsToggle" @handleIsToggleMenu="handleIsToggleMenu"    :isLock="isLock" @handleIsLock="handleIsLock" @setIsExistSubMenu="setIsExistSubMenu" />
+        <SideMenu  :isSideMenuToggle="isSideMenuToggle" @handleIsToggle="handleIsToggle" @handleIsToggleMenu="handleIsToggleMenu" :isLock="isLock" @handleIsLock="handleIsLock" @setIsExistSubMenu="setIsExistSubMenu" />
         <div class="container">
             <!--툴바-->
-            <tool-bar @openMyInfoPopup="openMyInfoPopup" :isMyInfoPopup="isMyInfoPopup" :isSideMenuToggle="isSideMenuToggle" @handleIsToggle="handleIsToggle" @handleToggleSearchPopup="handleToggleSearchPopup" />
+            <ToolBar @openMyInfoPopup="openMyInfoPopup" :isMyInfoPopup="isMyInfoPopup" :isSideMenuToggle="isSideMenuToggle" @handleIsToggle="handleIsToggle" @handleToggleSearchPopup="handleToggleSearchPopup" />
 
             <!-- 검색 팝업 -->
             <PopSearch v-if="isPopup" @handleToggleSearchPopup="handleToggleSearchPopup"  />
@@ -34,7 +34,6 @@ const isPopup = ref(false)
 onBeforeMount(() => {
     // store.dispatch('commonRefresh/setIsLock', false);  
     isLock.value = store.getters['commonRefresh/getIsLock']
-
     //반응형 웹일 때
     if(window.innerWidth <= 1280){
         isExistSubMenu.value = true
