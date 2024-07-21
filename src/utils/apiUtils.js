@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-//const apiUrl = process.env.VUE_APP_API_URL_API
-const apiUrl = "http://58.148.100.28:8080"
-//const apiUrl = "http://localhost:8080"
+const apiUrl = process.env.VUE_APP_BACKEND_HOST
 
 /**
  * back-end API 호출

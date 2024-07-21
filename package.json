@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 5000",
-    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve --mode local --port 5000",
+    "serve-dev": "vue-cli-service serve --mode development --port 5000",
+    "serve-prod": "vue-cli-service serve --mode production --port 5000",
+    "build": "vue-cli-service build --mode local",
+    "build-dev": "vue-cli-service build --mode development",
+    "build-prod": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -13,7 +17,9 @@
     "vue": "^3.2.13",
     "vue-router": "^4.4.0",
     "vuex": "^4.0.2",
-    "vuex-persistedstate": "^4.1.0"
+    "vuex-persistedstate": "^4.1.0",
+    "vee-validate": "^4.12.8",
+    "element-plus": "^2.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

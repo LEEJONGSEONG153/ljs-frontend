@@ -1,15 +1,18 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-export default createStore({
+import loginModule from './module/loginModule';
 
-  
-  plugins: [
-    createPersistedState({
-      key: 'vuexStore',
-      storage: window.localStorage,
-      paths: []
-    })
-  ]
+export default createStore({
+    modules:{
+        login: loginModule
+    },
+    plugins: [
+        createPersistedState({
+        key: 'vuexStore',
+        storage: window.localStorage,
+        paths: ['login']
+        })
+    ]
 });
 

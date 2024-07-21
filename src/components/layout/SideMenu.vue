@@ -27,8 +27,8 @@
                 <div v-for="(depth2, i) in subMenuList" :key="i" class="depth-wrap">
                     <p class="group-title">{{ depth2.menuNm }}</p>
                     <ul>
-                        <li v-for="(depth3, j) in depth2[depth2.menuCd]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.siteUrl && 'active'">
-                            <router-link :to="depth3.siteUrl">{{ depth3.menuNm}}</router-link>
+                        <li v-for="(depth3, j) in depth2[depth2.menuCd]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.menuPath && 'active'">
+                            <router-link :to="depth3.menuPath">{{ depth3.menuNm}}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -100,8 +100,8 @@
                         <div v-for="(depth2, i) in subMenuList" :key="i" class="depth-wrap">
                             <p class="group-title">{{ depth2.menuNm }}</p>
                             <ul>
-                                <li v-for="(depth3, j) in depth2[depth2.menuCd]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.siteUrl && 'active'">
-                                    <router-link :to="depth3.siteUrl">{{ depth3.menuNm}}</router-link>
+                                <li v-for="(depth3, j) in depth2[depth2.menuCd]" :key="j" @click="handleActiveSubMenu(depth3)" :class="currentMenu === depth3.menuPath && 'active'">
+                                    <router-link :to="depth3.menuPath">{{ depth3.menuNm}}</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -146,8 +146,15 @@ import menuApi from '@/apis/menuApi'
  */
 onBeforeMount( async() => {
 
-    let menuList2 = await menuApi.getMenuList();
-    menuList2 = menuList2.data;
+
+    const menuList2 = store.state.login.menuList
+
+    console.log('========================');
+    console.log('menuList2', menuList2);
+    console.log('========================');
+    
+    //let menuList2 = await menuApi.getMenuList();
+    //menuList2 = menuList2.data;
     mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == 'Y') //첫번째 계층의 메뉴 목록
 
     //if(store.state.login.userInfo.siteGroupId){
@@ -155,7 +162,7 @@ onBeforeMount( async() => {
             
             mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == 'Y') //첫번째 계층의 메뉴 목록
 
-            //const selectedMenu = menuList2.filter((item) => item.siteUrl === currentMenu.value) //선택된 메뉴의 menuCode를 추출해오기 위함
+            //const selectedMenu = menuList2.filter((item) => item.menuPath === currentMenu.value) //선택된 메뉴의 menuCd를 추출해오기 위함
             const selectedMenu = menuList2[3];
             
             // ** 선택된 메뉴의 최상위인 메인 메뉴의 active 설정 **
@@ -196,24 +203,24 @@ onBeforeMount( async() => {
             
             mainMenuList.value = menuList.filter((item) => item.level === 1 && item.isUse) //첫번째 계층의 메뉴 목록
 
-            const selectedMenu = menuList.filter((item) => item.siteUrl === currentMenu.value) //선택된 메뉴의 menuCode를 추출해오기 위함
+            const selectedMenu = menuList.filter((item) => item.menuPath === currentMenu.value) //선택된 메뉴의 menuCd를 추출해오기 위함
             
             // ** 선택된 메뉴의 최상위인 메인 메뉴의 active 설정 **
             // 해당 메뉴가 최상위가 아닌 경우
             if(selectedMenu.length > 0 ){ 
-                if(selectedMenu[0].parentMenuCode){
-                    const parentMenu = menuList.filter((item) => item.menuCode === selectedMenu[0].parentMenuCode) // 상위 메뉴 추출
+                if(selectedMenu[0].parentmenuCd){
+                    const parentMenu = menuList.filter((item) => item.menuCd === selectedMenu[0].parentmenuCd) // 상위 메뉴 추출
                     //또 다른 상위 메뉴가 있는 경우 최상위 메뉴 추출
                     if(parentMenu.length > 0 ){ 
-                        if(parentMenu[0].parentMenuCode){
-                            const grandParent = menuList.filter((item) => item.menuCode === parentMenu[0].parentMenuCode) 
-                            selectedMainMenu.value = grandParent[0].menuCode // main menu active 
+                        if(parentMenu[0].parentmenuCd){
+                            const grandParent = menuList.filter((item) => item.menuCd === parentMenu[0].parentmenuCd) 
+                            selectedMainMenu.value = grandParent[0].menuCd // main menu active 
                         }
                         
                     }
                 }else{
                     // 부모 메뉴가 없는 최상위 메뉴 라우터의 경우
-                    selectedMainMenu.value = selectedMenu[0].menuCode // main menu active
+                    selectedMainMenu.value = selectedMenu[0].menuCd // main menu active
                 }
             }
     }
@@ -221,7 +228,7 @@ onBeforeMount( async() => {
 })
 
 onMounted(() => {
-    sortByMenuCode(mainMenuList.value) //임시로  메인 메뉴 정렬 작업
+    sortBymenuCd(mainMenuList.value) //임시로  메인 메뉴 정렬 작업
 })
 
 /**
@@ -244,10 +251,10 @@ const handleActiveMainMenu = (value) => {
     }else{
         emits('handleIsToggleMenu', false)
         // 하위 메뉴가 없는 경우
-        const mainMenu = menuList.filter((item) => item.menuCode === selectedMainMenu.value)
-        if(mainMenu.length > 0 && mainMenu[0].siteUrl){
+        const mainMenu = menuList.filter((item) => item.menuCd === selectedMainMenu.value)
+        if(mainMenu.length > 0 && mainMenu[0].menuPath){
             //하위 메뉴가 없는 경우 화면 이동
-            router.push(mainMenu[0].siteUrl)    
+            router.push(mainMenu[0].menuPath)    
         }
         if(window.innerWidth <= 1280){
             emits('setIsExistSubMenu', true)
@@ -262,12 +269,12 @@ const handleActiveMainMenu = (value) => {
  */
 const handleActiveSubMenu = (depth3) => {
 
-    selectedSubMenu.value = depth3.menuCode;
+    selectedSubMenu.value = depth3.menuCd;
     // unlock인 경우에만 메뉴를 선택했을 때 서브메뉴 영역이 비활성화
     if(!props.isLock){
         emits('handleIsToggle', false)
     }
-    router.push(depth3.siteUrl) // 화면 이동
+    router.push(depth3.menuPath) // 화면 이동
 }
 
 /**
@@ -293,12 +300,12 @@ const handleResize = () => {
  * 메뉴 코드별 정렬 기능 
  * TODO: 현재는 임시 작업 Back-End 단에 order by 관한 문의를 드려놓은 상태. 답변 오면 추후 확인 필요
  */
-const sortByMenuCode = (array) => {
+const sortBymenuCd = (array) => {
     array.sort((a, b) => {
-        if (a.menuCode < b.menuCode) {
+        if (a.menuCd < b.menuCd) {
             return -1;
         }
-        if (a.menuCode > b.menuCode) {
+        if (a.menuCd > b.menuCd) {
             return 1;
         }
         return 0;
@@ -312,19 +319,21 @@ const checkCurrentMenuExistSubMenu = () => {
     const menuList = store.state.login.menuList
 
     // 1depth 메뉴를 눌렀을 때 그에 해당하는 2depth 메뉴, 3depth 메뉴를 세팅한다.
-    const depth2Menu  = menuList.filter((item) => item.level === 2 && item.isUse && selectedMainMenu.value === item.parentMenuCode)
+    const depth2Menu  = menuList.filter((item) => item.menuLevel == 2 && item.isUse && selectedMainMenu.value === item.parentMenuCd)
 
-    sortByMenuCode(depth2Menu) // 메뉴 코드별 정렬
-    
+    sortBymenuCd(depth2Menu) // 메뉴 코드별 정렬
+    console.log('========================');
+    console.log('depth2Menu', depth2Menu);
+    console.log('========================');
 
     let subMenus = []
     depth2Menu.map((depth2) => {
         let subMenu = {}
         subMenu = depth2
-        const depth3Menu = menuList.filter((item) => item.level === 3 && item.isUse && item.parentMenuCode === depth2.menuCode)
-        sortByMenuCode(depth3Menu) // 메뉴 코드별 정렬
+        const depth3Menu = menuList.filter((item) => item.menuLevel == 3 && item.isUse && item.parentMenuCd === depth2.menuCd)
+        sortBymenuCd(depth3Menu) // 메뉴 코드별 정렬
 
-        subMenu[depth2.menuCode] = depth3Menu
+        subMenu[depth2.menuCd] = depth3Menu
         subMenus.push(subMenu)
     })
 
@@ -348,10 +357,10 @@ watch(() => selectedMainMenu.value, () => {
         emits('setIsExistSubMenu', true)
     }else{
         // 하위 메뉴가 없는 경우
-        const mainMenu = menuList.filter((item) => item.menuCode === selectedMainMenu.value)
-        if(mainMenu.length > 0 && mainMenu[0].siteUrl){
+        const mainMenu = menuList.filter((item) => item.menuCd === selectedMainMenu.value)
+        if(mainMenu.length > 0 && mainMenu[0].menuPath){
             //하위 메뉴가 없는 경우 화면 이동
-            router.push(mainMenu[0].siteUrl)    
+            router.push(mainMenu[0].menuPath)    
         }
         if(window.innerWidth <= 1280){
             emits('setIsExistSubMenu', true)

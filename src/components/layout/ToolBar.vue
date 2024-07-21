@@ -93,7 +93,7 @@ const emits = defineEmits(['openMyInfoPopup' , "handleIsToggle", "handleToggleSe
 // 로그아웃
 const logout= async () => {
     //await loginApi.logout()
-    // store.dispatch("login/setLogoutData");
-    // router.push("/login")
+    store.dispatch("login/setLogoutData");
+    router.push("/login")
 }
 </script>
