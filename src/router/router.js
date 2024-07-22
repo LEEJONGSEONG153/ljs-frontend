@@ -20,7 +20,8 @@ const router = createRouter({
       children: [
         { path: "main", name:"main", component: () => import("@/views/main/Main.vue"), beforeEnter: checkPermission },
         { path: "temp1", name:"temp1", component: () => import("@/views/temp/Temp1.vue"), beforeEnter: checkPermission },
-        { path: "temp2", name:"temp2", component: () => import("@/views/temp/Temp2.vue"), beforeEnter: checkPermission }
+        { path: "temp2", name:"temp2", component: () => import("@/views/temp/Temp2.vue"), beforeEnter: checkPermission },
+        { path: "sample", name:"sample", component: () => import("@/views/sample/Sample.vue"), beforeEnter: checkPermission }
 
       ]
     },
