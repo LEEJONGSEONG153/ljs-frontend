@@ -21,6 +21,7 @@ const router = createRouter({
         { path: "movieGallery", name:"movieGallery", component: () => import("@/views/gallery/MovieGallery.vue"), beforeEnter: checkPermission },
         { path: "imageGallery", name:"imageGallery", component: () => import("@/views/gallery/ImageGallery.vue"), beforeEnter: checkPermission },
         { path: "sample", name:"sample", component: () => import("@/views/sample/Sample.vue"), beforeEnter: checkPermission },
+        { path: "gridSample", name:"gridSample", component: () => import("@/views/sample/GridSample.vue"), beforeEnter: checkPermission },
         { path: "menuSetting", name:"menuSetting", component: () => import("@/views/menu/MenuSetting.vue"), beforeEnter: checkPermission }
       ]
     },

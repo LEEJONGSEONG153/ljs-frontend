@@ -149,10 +149,6 @@ onBeforeMount( async() => {
 
     const menuList2 = store.state.login.menuList
 
-    console.log('========================');
-    console.log('menuList2', menuList2);
-    console.log('========================');
-    
     //let menuList2 = await menuApi.getMenuList();
     //menuList2 = menuList2.data;
     mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == 'Y') //첫번째 계층의 메뉴 목록
@@ -322,10 +318,7 @@ const checkCurrentMenuExistSubMenu = () => {
     const depth2Menu  = menuList.filter((item) => item.menuLevel == 2 && item.isUse && selectedMainMenu.value === item.parentMenuCd)
 
     sortBymenuCd(depth2Menu) // 메뉴 코드별 정렬
-    console.log('========================');
-    console.log('depth2Menu', depth2Menu);
-    console.log('========================');
-
+    
     let subMenus = []
     depth2Menu.map((depth2) => {
         let subMenu = {}

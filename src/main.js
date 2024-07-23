@@ -5,6 +5,8 @@ import store from './store/store'
 import axios from 'axios'
 
 import 'element-plus/dist/index.css'
+import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
+import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
 import '../public/assets/css/SUIT.css'
 import "../public/assets/css/reset.css"

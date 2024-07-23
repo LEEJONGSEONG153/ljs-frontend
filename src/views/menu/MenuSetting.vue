@@ -33,18 +33,17 @@
         <ag-grid-vue
             style="width: 100%; height: 100%"
             :columnDefs="columnInfo"
+            :rowData="rowData"
             class="ag-theme-quartz ag-theme-mycustom"
-            
             @grid-ready="onGridReady"
             :rowSelection="'multiple'"
             :rowMultiSelectWithClick="true"
-            
-            
+            :gridOptions="gridOptions"
             :headerHeight="`54px`"
             :rowHeight="`64px`"
-            
             >
         </ag-grid-vue>
+
       </div>
     </div>
   </section>
@@ -82,9 +81,9 @@ function handleAddBtn() {
     add: [newEntry],
   };
 
-  gridApi.value.applyServerSideTransaction(transaction);
+  gridApi.value.applyTransaction (transaction);
   gridApi.value.ensureIndexVisible(0, 'top')  // 첫번째 행 보여주기
-  gridApi.value.setFocusedCell(0, 'menuCode'); // 첫번째 행의 menuCode cell 포커싱
+  gridApi.value.setFocusedCell(0, 'menuCd'); // 첫번째 행의 menuCd cell 포커싱
 }
 
 // 조회 버튼시 검색조건으로 데이터조회
@@ -113,8 +112,8 @@ const maxBlocksInCache = ref(5);
 const gridApi = ref();
 const columnInfo = ref([
   {checkboxSelection: true, headerCheckboxSelection: true, flex: 0.1, minWidth: 60},
-  {headerName: "아이디", field: "menuCode", editable: true},
-  {headerName: "메뉴명", field: "menuName", editable: true},
+  {headerName: "아이디", field: "menuCd", editable: true},
+  {headerName: "메뉴명", field: "menuNm", editable: true},
   {
     headerName: "사용",
     field: "isUse",
@@ -129,14 +128,16 @@ const columnInfo = ref([
     cellRenderer: "agCheckboxCellRenderer",
     cellEditor: "agCheckboxCellEditor",
   },
-  {headerName: "주소", field: "siteUrl",editable: true},
+  {headerName: "주소", field: "menuPath",editable: true},
   {headerName: "비고", field: "remark", editable: true},
-  {headerName: "아이콘", field: "icon",editable: true},
+  {headerName: "아이콘", field: "",editable: true},
   {headerName: "등록자", field: "insertName"},
   {headerName: "등록일", field: "insertDate"},
   {headerName: "수정자", field: "updateName"},
   {headerName: "수정일", field: "updateDate"},
 ]);
+
+
 
 // grid Default Option 설정하기
 const gridOptions = ref(Object.assign({}, GRID_DEFAULT_OPTION, {
@@ -145,17 +146,17 @@ const gridOptions = ref(Object.assign({}, GRID_DEFAULT_OPTION, {
 
     const field = params.column.colId
 
-    if (field === "menuCode") {
+    if (field === "menuCd") {
       // 1. 중복 검증
       //수정건
       if(params.data.id){
-        if(menuList.value.filter((item) => item.menuCode === params.newValue).length > 1){
+        if(menuList.value.filter((item) => item.menuCd === params.newValue).length > 1){
           alertMsg("아이디가 중복됩니다.", "", "warning");
           isPassed = false
         }
       }else{
         //신규
-        if(menuList.value.filter((item) => item.menuCode === params.newValue).length === 1){
+        if(menuList.value.filter((item) => item.menuCd === params.newValue).length === 1){
           alertMsg("아이디가 중복됩니다.", "", "warning");
           isPassed = false
         }
@@ -178,7 +179,7 @@ const gridOptions = ref(Object.assign({}, GRID_DEFAULT_OPTION, {
         nextTick(() => {
           params.api.startEditingCell({
             rowIndex: params.node.rowIndex,
-            colKey: "menuCode",
+            colKey: "menuCd",
           });
         });
       }
@@ -191,26 +192,19 @@ const gridOptions = ref(Object.assign({}, GRID_DEFAULT_OPTION, {
     
   }
 }));
-let rowData;
+const rowData = ref();
 // Ag-grid 서버사이드 데이터 조회
-const getServerSideData = async (params) => {
+const getClientSideData = async (params) => {
   try {
 
     const response = await menuApi.getMenuList();
     //menuList2 = menuList2.data;
     //const response = await siteMenuApi.getMenuList({...searchParam});
     console.log(response);
-
-  
-    
-  
   
     let rows = response.data;
-    gridApi.value.setGridOption("rowData",response.data)
+    rowData.value = rows;
 
-    console.log('========================');
-    console.log('response.data', response.data);
-    console.log('========================');
     
 
  
@@ -218,7 +212,7 @@ const getServerSideData = async (params) => {
     menuList.value = response.data
     const filterRows = rows.filter(
         (row) =>
-            row.menuCode.includes(searchParam.search) || row.menuName.includes(searchParam.search)
+            row.menuCd.includes(searchParam.search) || row.menuNm.includes(searchParam.search)
     );
     //params.success({
      // rowData: filterRows
@@ -229,15 +223,9 @@ const getServerSideData = async (params) => {
 };
 
 const onGridReady = (params) => {
-  gridApi.value = params.api;
-  gridApi.value.setGridOption("rowData",rowData)
-//   gridApi.value.setGridOption("serverSideDatasource", {
-//     getRows: getServerSideData,
-//   });
-getServerSideData();
-
-
-
+    gridApi.value = params.api;
+    //getServerSideData();
+    getClientSideData();
 };
 
 const getRowId = (params) => {
@@ -247,7 +235,8 @@ const getRowId = (params) => {
 // Ag-grid 리프레시
 const resetGrid = () => {
     //refreshClientSideRowModel
-  gridApi.value.refreshServerSide({route: undefined, purge: true});
+    getClientSideData();
+  //gridApi.value.refreshClientSideRowModel("sort");
 };
 
 // 저장
@@ -260,11 +249,11 @@ const handleSave = async () => {
     if (rowNode.isSelected()) {
       
       //기존 메뉴
-      if(menuList.value.filter((item) => item.menuCode === rowNode.data.menuCode).length > 1){
+      if(menuList.value.filter((item) => item.menuCd === rowNode.data.menuCd).length > 1){
         isDuplicated = true
       }
 
-      if (!rowNode.data.menuCode || !rowNode.data.menuName) {
+      if (!rowNode.data.menuCd || !rowNode.data.menuNm) {
         hasEmptyFields = true;
       }
       selectedRows.push(rowNode.data);
@@ -285,20 +274,21 @@ const handleSave = async () => {
   if (selectedRows.length > 0) {
     try {
       const payload = {
-        insertId: store.getters["login/getId"],
-        siteMenus: selectedRows.map((row) => ({
-          id: row.id || null,
-          projectCode: row.id ? row.projectCode : PROJECT_CODE, // 수정 시 기존 projectCode 유지, 신규 추가 시 1로 설정
-          menuCode: row.menuCode || "", // 값이 없으면 빈 문자열로 설정
-          menuName: row.menuName || "", // 값이 없으면 빈 문자열로 설정
-          siteUrl: row.siteUrl || "", // 값이 없으면 빈 문자열로 설정
-          imageUrl: row.imageUrl || "", // 값이 없으면 빈 문자열로 설정
+        insertId: "admin",
+        Menus: selectedRows.map((row) => ({
+          //id: row.id || null,
+          //projectCode: row.id ? row.projectCode : PROJECT_CODE, // 수정 시 기존 projectCode 유지, 신규 추가 시 1로 설정
+          menuCd: row.menuCd || "", // 값이 없으면 빈 문자열로 설정
+          menuNm: row.menuNm || "", // 값이 없으면 빈 문자열로 설정
+          menuPath: row.menuPath || "", // 값이 없으면 빈 문자열로 설정
+          //imageUrl: row.imageUrl || "", // 값이 없으면 빈 문자열로 설정
           remark: row.remark || "", // 값이 없으면 빈 문자열로 설정
-          icon: row.icon || "", // 값이 없으면 빈 문자열로 설정
+          //icon: row.icon || "", // 값이 없으면 빈 문자열로 설정
           isUse: row.isUse,
         })),
       };
-      const result = await siteMenuApi.updateMenu(payload); // saveSiteMenu API 호출
+      const result = await menuApi.updateMenu(payload); // saveSiteMenu API 호출
+        console.log(result);
       if (result.code === "00") {
         alertMsg("저장되었습니다.", "", "success");
         resetGrid();
@@ -307,6 +297,7 @@ const handleSave = async () => {
         alertMsg("저장에 실패했습니다.", "", "error");
       }
     } catch (error) {
+        console.log(error);
       alertMsg("저장 중 오류가 발생했습니다.", "", "error");
     }
   } else {

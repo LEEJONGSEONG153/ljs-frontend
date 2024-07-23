@@ -9,7 +9,6 @@ const apiUrl = process.env.VUE_APP_BACKEND_HOST
  */
 export const useFetch = async (url, params) => {
     try {
-        console.log('here')
         const response = await axios.post(`${apiUrl}${url}`, params)
         return response.data;
     } catch (error) {
