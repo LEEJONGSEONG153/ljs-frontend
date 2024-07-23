@@ -7,9 +7,9 @@
         <div class="login-area">
           <div class="flex-cc gap-8 mb-16">
             <h1>
-              <img src="assets/img/logo-navy.png" alt="CRK" />
+              <img src="assets/img/logo-navy.png" alt="LJS" />
             </h1>
-            <h4 class="f-bold">통합관제시스템</h4>
+            <h4 class="f-bold">서버</h4>
           </div>
 
           <div class="login-input-wrap">

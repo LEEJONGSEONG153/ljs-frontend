@@ -12,17 +12,16 @@ const checkPermission = (to, from, next) => {
     next();
 }
 
-
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", name:"defaultLayout", redirect:"/main", component: () => import("@/views/DefaultLayout.vue"),
       children: [
         { path: "main", name:"main", component: () => import("@/views/main/Main.vue"), beforeEnter: checkPermission },
-        { path: "temp1", name:"temp1", component: () => import("@/views/temp/Temp1.vue"), beforeEnter: checkPermission },
-        { path: "temp2", name:"temp2", component: () => import("@/views/temp/Temp2.vue"), beforeEnter: checkPermission },
-        { path: "sample", name:"sample", component: () => import("@/views/sample/Sample.vue"), beforeEnter: checkPermission }
-
+        { path: "movieGallery", name:"movieGallery", component: () => import("@/views/gallery/MovieGallery.vue"), beforeEnter: checkPermission },
+        { path: "imageGallery", name:"imageGallery", component: () => import("@/views/gallery/ImageGallery.vue"), beforeEnter: checkPermission },
+        { path: "sample", name:"sample", component: () => import("@/views/sample/Sample.vue"), beforeEnter: checkPermission },
+        { path: "menuSetting", name:"menuSetting", component: () => import("@/views/menu/MenuSetting.vue"), beforeEnter: checkPermission }
       ]
     },
     { path: "/login", name:"login", component: () => import("@/views/login/Login.vue")}
@@ -30,4 +29,3 @@ const router = createRouter({
 });
 
 export default router;
-

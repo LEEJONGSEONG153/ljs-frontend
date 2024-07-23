@@ -4,7 +4,7 @@
         <nav>
             <div class="main-category">
                 <h1>
-                    <a href="./index.html">CRK</a>
+                    <a href="./index.html">LJS</a>
                 </h1>
     
                 <ul>

@@ -4,7 +4,7 @@
         <nav class="pc" >
             <div class="main-category">
                 <h1>
-                    <router-link to="/">CRK</router-link>
+                    <router-link to="/">LJS</router-link>
                 </h1>
 
                 <!-- PC 버전 1뎁스메뉴 -->
@@ -46,7 +46,7 @@
                 <div class="group">
                     <div class="flex-cb mb-14">
                         <h1>
-                            <a href="./index.html">CRK</a>
+                            <a href="./index.html">LJS</a>
                         </h1>
                         
                         <!-- script!!! 닫기 버튼 클릭 시 show 클래스 삭제-->
