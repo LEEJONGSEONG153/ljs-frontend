@@ -149,14 +149,18 @@ onBeforeMount( async() => {
 
     const menuList2 = store.state.login.menuList
 
+    console.log('========================');
+    console.log('menuList2', menuList2);
+    console.log('========================');
+
     //let menuList2 = await menuApi.getMenuList();
     //menuList2 = menuList2.data;
-    mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == 'Y') //첫번째 계층의 메뉴 목록
+    mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == true) //첫번째 계층의 메뉴 목록 'Y'
 
     //if(store.state.login.userInfo.siteGroupId){
         // const menuList = store.state.login.menuList
             
-            mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == 'Y') //첫번째 계층의 메뉴 목록
+            mainMenuList.value = menuList2.filter((item) => item.menuLevel == 1 && item.isUse == true) //첫번째 계층의 메뉴 목록
 
             //const selectedMenu = menuList2.filter((item) => item.menuPath === currentMenu.value) //선택된 메뉴의 menuCd를 추출해오기 위함
             const selectedMenu = menuList2[3];
