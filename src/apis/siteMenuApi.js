@@ -1,4 +1,4 @@
-import { useGet, useFetch, useDelete, usePut } from '@/utils/apiUtils';
+import { useGet, usePost, useDelete, usePut } from '@/utils/apiUtils';
 import axios from 'axios';
 
 /**
@@ -13,7 +13,7 @@ const userApi = {
    * @returns 
    */
   getMenuList : async (param) => {
-    return await useFetch('/api/v1/site-menu/getList', param)
+    return await usePost('/api/v1/site-menu/getList', param)
   },
 
   /**
@@ -22,7 +22,7 @@ const userApi = {
    * @returns 
    */
   updateMenu : async (param) => {
-    return await useFetch('/api/v1/site-menu/saveList', param)
+    return await usePost('/api/v1/site-menu/saveList', param)
   },
 
   /**
@@ -31,7 +31,7 @@ const userApi = {
    * @returns 
    */
   deleteMenu : async (param) => {
-    return await useFetch('/api/v1/site-menu/deleteList', param)
+    return await usePost('/api/v1/site-menu/deleteList', param)
   }
 
 }

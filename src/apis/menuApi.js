@@ -1,4 +1,4 @@
-import { useGet, useFetch, useDelete, usePut } from '@/utils/apiUtils';
+import { useGet, usePost, useDelete, usePut } from '@/utils/apiUtils';
 import axios from 'axios'
 
 const menuApi = {
@@ -8,7 +8,12 @@ const menuApi = {
     },
     
     updateMenu : async(param) => {
-        return await useFetch('/api/v1/menu',param);
+        return await usePost('/api/v1/menu',param);
+    },
+
+    deleteMenu : async (param) => {
+        console.log(param);
+        return await useDelete('/api/v1/menu', param)
     }
 }
 

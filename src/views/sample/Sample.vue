@@ -16,9 +16,10 @@
 </template>
 
 <script setup>
-import { useGet, useFetch, useDelete, usePut } from '@/utils/apiUtils';
+import { useGet, usePost, useDelete, usePut } from '@/utils/apiUtils';
 import { ElMessage } from 'element-plus'
 import { UploadFilled } from '@element-plus/icons-vue'
+import heic2any from'heic2any';
 /**
  * 업로드 전
  * action 에 적힌 url 타기 전인데 return false로 rawFile 정보 저장
@@ -31,15 +32,19 @@ const beforeAvatarUpload = async(rawFile) => {
     alert(ext);
 
     //todo 확장자 체크 필요 and 여러개 올리고 싶은것에 대한 경고문 필요
-    if(!['jpg', 'jpeg', 'png', 'gif', 'bmp', 'mp4', 'mov'].includes(ext)){
+    if(!['jpg', 'jpeg', 'png', 'gif', 'bmp', 'mp4', 'mov','heic'].includes(ext)){
          ElMessage.error(ext+'확장자는 허용 되지 않습니다.')
          return false;
     }
     // uploadFile = rawFile;
     // fileName.value = rawFile.name;
     // fileSize.value = rawFile.size/1000 + 'kb'
-
     const date = new Date(rawFile.lastModifiedDate);
+    
+    //heic -> jpeg
+    if(ext == "heic"){
+        rawFile =await getHeicToJpeg(rawFile);
+    }
 
     // 원하는 형식으로 날짜 형식화
     let createDate = date.getFullYear() +
@@ -56,9 +61,23 @@ const beforeAvatarUpload = async(rawFile) => {
         }
     }
     
-    await useFetch('/api/v1/fileUpload', formData, axiosConfig)
+    await usePost('/api/v1/fileUpload', formData, axiosConfig)
     
     return false;
+}
+
+
+const getHeicToJpeg = async (file)=>{
+    const blob = new Blob([file]);
+	const JpegBlob = await heic2any({
+		blob:blob,
+		toType: 'image/jpeg'
+	})
+
+	const name = file.name.split('.')[0] + '.jpeg'
+	const newFile = new File([JpegBlob],name)
+
+	return newFile
 }
 </script>
 

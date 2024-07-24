@@ -12,13 +12,13 @@
 </template>
 
 <script setup>
-import { useGet, useFetch, useDelete, usePut } from '@/utils/apiUtils';
+import { useGet, usePost, useDelete, usePut } from '@/utils/apiUtils';
 import { onMounted, ref } from 'vue';
 
 const files = ref(null);
 
 onMounted( async()=>{
-    const result = await useFetch('/api/v1/file/getList',{galleryType :"movie"});    
+    const result = await usePost('/api/v1/file/getList',{galleryType :"movie"});    
     files.value = result;
 })
 

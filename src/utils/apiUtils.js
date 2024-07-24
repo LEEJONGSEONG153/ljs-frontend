@@ -22,7 +22,7 @@ export const useGet = async (url, params) => {
  * @param {*} url 
  * @param {*} params 
  */
-export const useFetch = async (url, params) => {
+export const usePost = async (url, params) => {
     try {
         //모바일에서 로컬pc 접속했을때 자꾸 cors떠서 proxy 처리 해놓음
         //const response = await axios.post(`${apiUrl}${url}`, params)
@@ -41,7 +41,7 @@ export const useDelete = async (url, params) => {
     try {
         //모바일에서 로컬pc 접속했을때 자꾸 cors떠서 proxy 처리 해놓음
         //const response = await axios.post(`${apiUrl}${url}`, params)
-        const response = await axios.delete(`${url}`, params)
+        const response = await axios.delete(`${url}`, {data:{params}})
         return response.data;
     } catch (error) {
         console.log(error)

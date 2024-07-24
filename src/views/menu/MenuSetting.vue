@@ -76,16 +76,16 @@ let searchParam = {
 
 /** 추가버튼을 클릭했을때 */
 function handleAddBtn() {
-    
-  const newEntry = {isUse: true};
-  const transaction = {
-    addIndex: 0,
-    add: [newEntry],
-  };
 
-  gridApi.value.applyTransaction (transaction);
-//   gridApi.value.ensureIndexVisible(0, 'top')  // 첫번째 행 보여주기
-//   gridApi.value.setFocusedCell(0, 'menuCd'); // 첫번째 행의 menuCd cell 포커싱
+    const newEntry = {isUse: true};
+    const transaction = {
+        addIndex: 0,
+        add: [newEntry],
+    };
+
+    gridApi.value.applyTransaction (transaction);
+    gridApi.value.ensureIndexVisible(0, 'top')  // 첫번째 행 보여주기
+    gridApi.value.setFocusedCell(0, 'menuCd'); // 첫번째 행의 menuCd cell 포커싱
 }
 
 // 조회 버튼시 검색조건으로 데이터조회
@@ -163,12 +163,12 @@ const gridOptions = ref(Object.assign({}, GRID_DEFAULT_OPTION, {
           isPassed = false
         }
       }
-      // 2. 값 유효성 검증
-      if(!menuCodeValidation(params.newValue)){
-          alertMsg("메뉴 코드는 최대 6자리까지의 영문 혹은 숫자만 입력하실 수 있습니다.", "", "warning");
-          isPassed = false
+      // 2. 값 유효성 검증  todo
+    //   if(!menuCodeValidation(params.newValue)){
+    //       alertMsg("메뉴 코드는 최대 6자리까지의 영문 혹은 숫자만 입력하실 수 있습니다.", "", "warning");
+    //       isPassed = false
           
-      }
+    //   }
 
       //검증에 실패한 경우 기존 값 세팅 
       if(!isPassed){
@@ -202,21 +202,14 @@ const getClientSideData = async (params) => {
     const response = await menuApi.getMenuList();
     //menuList2 = menuList2.data;
     //const response = await siteMenuApi.getMenuList({...searchParam});
-    console.log(response);
-  
     let rows = response.data;
     rowData.value = rows;
-
-    
-
- 
-    
     menuList.value = response.data
-    const filterRows = rows.filter(
-        (row) =>
-            row.menuCd.includes(searchParam.search) || row.menuNm.includes(searchParam.search)
-    );
-    //params.success({
+    // const filterRows = rows.filter(
+    //     (row) =>
+    //         row.menuCd.includes(searchParam.search) || row.menuNm.includes(searchParam.search)
+    // );
+    // //params.success({
      // rowData: filterRows
     //});
   } catch (error) {
@@ -231,7 +224,7 @@ const onGridReady = (params) => {
 };
 
 const getRowId = (params) => {
-  return params.data.menuId;
+  return params.data.menuCd;
 };
 
 // Ag-grid 리프레시
@@ -316,17 +309,23 @@ const handleDelete = async () => {
 // 가져온 데이터 중 선택된 데이터만 가져오기
   gridApi.value.forEachNode((rowNode) => {
     if (rowNode.selected) {
-        deleteRows.push(rowNode.data.menuId);
+        deleteRows.push(rowNode.data.menuCd);
     }
   });
 
+  console.log('========================');
+  console.log('deleteRows', deleteRows);
+  console.log('========================');
+
   if (deleteRows.length > 0) {
+    console.log('dd');
     store.dispatch("confirm/open", {
       title: "메뉴 삭제",
       message: "삭제 하시겠습니까?",
       callback: async () => {
         try {
-          const deleteResult = await siteMenuApi.deleteMenu(deleteRows);
+          //const deleteResult = await siteMenuApi.deleteMenu(deleteRows);
+          const deleteResult = await menuApi.deleteMenu(deleteRows);
           if (deleteResult.code !== "00") {
             throw new Error("메뉴 삭제 실패");
           }
