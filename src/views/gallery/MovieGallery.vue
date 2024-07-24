@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useFetch } from '@/utils/apiUtils';
+import { useGet, useFetch, useDelete, usePut } from '@/utils/apiUtils';
 import { onMounted, ref } from 'vue';
 
 const files = ref(null);

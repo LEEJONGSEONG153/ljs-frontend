@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { useFetch } from '@/utils/apiUtils';
+import { useGet, useFetch, useDelete, usePut } from '@/utils/apiUtils';
 import { ElMessage } from 'element-plus'
 import { UploadFilled } from '@element-plus/icons-vue'
 /**
@@ -26,6 +26,9 @@ import { UploadFilled } from '@element-plus/icons-vue'
 const beforeAvatarUpload = async(rawFile) => {
     
     let ext = rawFile.name.split('.').pop().toLowerCase();
+
+
+    alert(ext);
 
     //todo 확장자 체크 필요 and 여러개 올리고 싶은것에 대한 경고문 필요
     if(!['jpg', 'jpeg', 'png', 'gif', 'bmp', 'mp4', 'mov'].includes(ext)){

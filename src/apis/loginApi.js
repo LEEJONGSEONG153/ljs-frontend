@@ -1,4 +1,4 @@
-import { useFetch } from '@/utils/apiUtils';
+import { useGet, useFetch, useDelete, usePut } from '@/utils/apiUtils';
 import axios from 'axios';
 // import store from '@/store/store';
 /**
@@ -13,7 +13,7 @@ const loginApi = {
    * @returns 
    */
   login : async (param) => {
-    return await useFetch('/api/v1/login', param)
+    return await useFetch('/api/v1/login',param)
   },
   login2 : async (param) => {
     return await useFetch('/api/v1/oauth/login', param)
