@@ -16,7 +16,9 @@
     "core-js": "^3.8.3",
     "element-plus": "^2.7.3",
     "heic2any": "^0.0.4",
+    "v-viewer": "^3.0.13",
     "vee-validate": "^4.12.8",
+    "viewerjs": "^1.11.6",
     "vue": "^3.2.13",
     "vue-router": "^4.4.0",
     "vuex": "^4.0.2",
@@ -53,5 +55,4 @@
     "not dead",
     "not ie 11"
   ]
-  
 }
