@@ -50,10 +50,6 @@ onMounted( async()=>{
     const result = await usePost('/api/v1/file/getList',{galleryType :"image"});    
     files.value = result;
 
-    console.log('========================');
-    console.log('result', result);
-    console.log('========================');
-
     for(let i=0; i<files.value.length; i++) {
         images.value.push({
             src : "http://58.148.100.28"+files.value[i].filePath+'/'+files.value[i].fileNm,
@@ -66,11 +62,11 @@ onMounted( async()=>{
 </script>
 
 <style>
-img {
+/* img {
     width: 330px;
     height: 330px;
     object-fit: cover;
-}
+} */
 .viewer-title {
 
     font-size: 24px;

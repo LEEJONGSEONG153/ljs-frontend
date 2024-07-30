@@ -25,11 +25,10 @@ import heic2any from'heic2any';
  * action 에 적힌 url 타기 전인데 return false로 rawFile 정보 저장
  */
 const beforeAvatarUpload = async(rawFile) => {
-    
+
+    console.log('rawFile', rawFile);
+        
     let ext = rawFile.name.split('.').pop().toLowerCase();
-
-
-    alert(ext);
 
     //todo 확장자 체크 필요 and 여러개 올리고 싶은것에 대한 경고문 필요
     if(!['jpg', 'jpeg', 'png', 'gif', 'bmp', 'mp4', 'mov','heic'].includes(ext)){
