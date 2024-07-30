@@ -16,7 +16,7 @@
     <div v-for="(item,index) in uploadFiles" :key="index">
         <p>{{item.name}}</p>
     </div>
-    <button type="button" class="btn medium filled" v-if="saveBtnFlag"  @click="saveFile">저장</button>
+    <button type="button" class="btn medium filled" v-if="saveBtnFlag" @click="saveFile">업로드</button>
 </template>
 
 <script setup>
@@ -96,7 +96,7 @@ const saveFile = async () => {
         title: "파일 업로드",
         message: "파일을 업로드 하시겠습니까?",
         callback: async () => {
-            
+
             let formData = new FormData();
 
             for(let i=0;i<uploadFiles.value.length; i++) {
@@ -116,7 +116,6 @@ const saveFile = async () => {
 
             uploadFiles.value = [];
             createDates.value = [];
-            
         }
     })
 }

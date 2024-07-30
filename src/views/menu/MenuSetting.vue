@@ -313,12 +313,8 @@ const handleDelete = async () => {
     }
   });
 
-  console.log('========================');
-  console.log('deleteRows', deleteRows);
-  console.log('========================');
-
   if (deleteRows.length > 0) {
-    console.log('dd');
+    
     store.dispatch("confirm/open", {
       title: "메뉴 삭제",
       message: "삭제 하시겠습니까?",

@@ -1,4 +1,7 @@
 <template>
+    <el-input-number v-model="start" :min="0" :max="1000" @change="dayChange"/>
+    ~~~~~
+    <el-input-number v-model="end" :min="0" :max="1000" @change="dayChange"/>
 
     <Viewer :images="images"
             @inited="inited"
@@ -25,6 +28,8 @@ const files = ref(null);
 const images = ref([]);
 const imgSize = ref(null);
 const viewer2 = ref(null);
+const start = ref(0);
+const end = ref(150);
 
 
 const inited = (viewer) => {
@@ -47,7 +52,7 @@ const options = ref({
 
 
 onMounted( async()=>{
-    const result = await usePost('/api/v1/file/getList',{galleryType :"image"});    
+    const result = await usePost('/api/v1/file/getList',{galleryType :"image", start:start.value, end:end.value});    
     files.value = result;
 
     for(let i=0; i<files.value.length; i++) {
@@ -59,6 +64,25 @@ onMounted( async()=>{
     //viewer 사이즈 조정
     imgSize.value = "height: auto; width:"+window.innerWidth+"px";
 })
+
+const dayChange = async() => {
+
+    images.value = [];
+
+    const result = await usePost('/api/v1/file/getList',{galleryType :"image", start:start.value, end:end.value});  
+    console.log(result)  
+    files.value = result;
+
+    for(let i=0; i<files.value.length; i++) {
+        images.value.push({
+            src : "http://58.148.100.28"+files.value[i].filePath+'/'+files.value[i].fileNm,
+            title : '인생'+ files.value[i].ljsDays + '일차'
+        })
+    }
+    //viewer 사이즈 조정
+    imgSize.value = "height: auto; width:"+window.innerWidth+"px";
+
+}
 </script>
 
 <style>

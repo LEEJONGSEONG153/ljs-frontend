@@ -20,7 +20,7 @@ const router = createRouter({
         { path: "main", name:"main", component: () => import("@/views/main/Main.vue"), beforeEnter: checkPermission },
         { path: "movieGallery", name:"movieGallery", component: () => import("@/views/gallery/MovieGallery.vue"), beforeEnter: checkPermission },
         { path: "imageGallery", name:"imageGallery", component: () => import("@/views/gallery/ImageGallery.vue"), beforeEnter: checkPermission },
-        { path: "sample", name:"sample", component: () => import("@/views/sample/Sample.vue"), beforeEnter: checkPermission },
+        { path: "fileUpload", name:"fileUpload", component: () => import("@/views/gallery/FileUpload.vue"), beforeEnter: checkPermission },
         { path: "gridSample", name:"gridSample", component: () => import("@/views/sample/GridSample.vue"), beforeEnter: checkPermission },
         { path: "menuSetting", name:"menuSetting", component: () => import("@/views/menu/MenuSetting.vue"), beforeEnter: checkPermission }
       ]
