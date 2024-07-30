@@ -28,7 +28,7 @@ export const usePost = async (url, params) => {
         //const response = await axios.post(`${apiUrl}${url}`, params)
         
         const response = await axios.post(`${apiUrl}${url}`, params)
-        return response.data;
+        return response;
     } catch (error) {
         console.log(error)
     }
