@@ -1,7 +1,9 @@
 <template>
-    <el-input-number v-model="start" :min="0" :max="1000" @change="dayChange"/>
-    ~~~~~
-    <el-input-number v-model="end" :min="0" :max="1000" @change="dayChange"/>
+
+    <div class="slider-demo-block">
+        <span class="demonstration">준수 일자 검색(1일~400일)</span>
+        <el-slider v-model="sliderValue" @change="dayChange" range show-stops :min="1" :max="400" />
+    </div>
 
     <Viewer :images="images"
             @inited="inited"
@@ -30,7 +32,7 @@ const imgSize = ref(null);
 const viewer2 = ref(null);
 const start = ref(0);
 const end = ref(150);
-
+const sliderValue = ref([0,150]);
 
 const inited = (viewer) => {
     viewer2.value = viewer
@@ -69,7 +71,7 @@ const dayChange = async() => {
 
     images.value = [];
 
-    const result = await usePost('/api/v1/file/getList',{galleryType :"image", start:start.value, end:end.value});  
+    const result = await usePost('/api/v1/file/getList',{galleryType :"image", start:sliderValue.value[0], end:sliderValue.value[1]});  
     console.log(result)  
     files.value = result;
 
@@ -92,9 +94,30 @@ const dayChange = async() => {
     object-fit: cover;
 } */
 .viewer-title {
-
     font-size: 24px;
-  
+}
+
+.slider-demo-block {
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+}
+.slider-demo-block .el-slider {
+  margin-top: 0;
+  margin-left: 0px;
+}
+.slider-demo-block .demonstration {
+  font-size: 12px;
+  color: var(--el-text-color-secondary);
+  line-height: 44px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+.slider-demo-block .demonstration + .el-slider {
+  flex: 0 0 70%;
 }
 
 </style>
