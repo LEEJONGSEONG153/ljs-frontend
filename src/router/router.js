@@ -22,7 +22,8 @@ const router = createRouter({
         { path: "imageGallery", name:"imageGallery", component: () => import("@/views/gallery/ImageGallery.vue"), beforeEnter: checkPermission },
         { path: "fileUpload", name:"fileUpload", component: () => import("@/views/gallery/FileUpload.vue"), beforeEnter: checkPermission },
         { path: "gridSample", name:"gridSample", component: () => import("@/views/sample/GridSample.vue"), beforeEnter: checkPermission },
-        { path: "menuSetting", name:"menuSetting", component: () => import("@/views/menu/MenuSetting.vue"), beforeEnter: checkPermission }
+        { path: "menuSetting", name:"menuSetting", component: () => import("@/views/menu/MenuSetting.vue"), beforeEnter: checkPermission },
+        { path: "sudoku", name:"sudoku", component: () => import("@/views/game/Sudoku.vue"), beforeEnter: checkPermission }
       ]
     },
     { path: "/login", name:"login", component: () => import("@/views/login/Login.vue")}
