@@ -1,64 +1,77 @@
 <template>
-    
+    <div class="sudoku">
+        <button class="btnNumber" @click="fnShowValue(0)">0</button>
+        <button class="btnNumber" @click="fnShowValue(1)">1</button>
+        <button class="btnNumber" @click="fnShowValue(2)">2</button>
+        <button class="btnNumber" @click="fnShowValue(3)">3</button>
+        <button class="btnNumber" @click="fnShowValue(4)">4</button>
+        <button class="btnNumber" @click="fnShowValue(5)">5</button>
+        <button class="btnNumber" @click="fnShowValue(6)">6</button>
+        <button class="btnNumber" @click="fnShowValue(7)">7</button>
+        <button class="btnNumber" @click="fnShowValue(8)">8</button>
+        <button class="btnNumber" @click="fnShowValue(9)">9</button>
+        <div class="board" ref="board"></div>
+        <table class="backboard" id="backboard">
+            <tbody>
+                <tr>
+                    <td class="backboard-title">1</td>
+                    <td ref="td_1"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">2</td>
+                    <td ref="td_2"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">3</td>
+                    <td ref="td_3"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">4</td>
+                    <td ref="td_4"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">5</td>
+                    <td ref="td_5"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">6</td>
+                    <td ref="td_6"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">7</td>
+                    <td ref="td_7"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">8</td>
+                    <td ref="td_8"></td>
+                </tr>
+                <tr>
+                    <td class="backboard-title">9</td>
+                    <td ref="td_9"></td>
+                </tr>
 
-    <button class="btnNumber" onclick="fnShowValue(0)">0</button>
-    <button class="btnNumber" onclick="fnShowValue(1)">1</button>
-    <button class="btnNumber" onclick="fnShowValue(2)">2</button>
-    <button class="btnNumber" onclick="fnShowValue(3)">3</button>
-    <button class="btnNumber" onclick="fnShowValue(4)">4</button>
-    <button class="btnNumber" onclick="fnShowValue(5)">5</button>
-    <button class="btnNumber" onclick="fnShowValue(6)">6</button>
-    <button class="btnNumber" onclick="fnShowValue(7)">7</button>
-    <button class="btnNumber" onclick="fnShowValue(8)">8</button>
-    <button class="btnNumber" onclick="fnShowValue(9)">9</button>
-    <div class="board" id="board"></div>
-    <table class="backboard" id="backboard">
-        <tbody>
-            <tr>
-                <td class="backboard-title">1</td>
-                <td id="td_1"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">2</td>
-                <td id="td_2"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">3</td>
-                <td id="td_3"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">4</td>
-                <td id="td_4"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">5</td>
-                <td id="td_5"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">6</td>
-                <td id="td_6"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">7</td>
-                <td id="td_7"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">8</td>
-                <td id="td_8"></td>
-            </tr>
-            <tr>
-                <td class="backboard-title">9</td>
-                <td id="td_9"></td>
-            </tr>
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </template>
 <script setup>
+    import { onMounted, ref } from 'vue';
+
+    const board = ref(null);
+    const td_1 = ref(null);
+    const td_2 = ref(null);
+    const td_3 = ref(null);
+    const td_4 = ref(null);
+    const td_5 = ref(null);
+    const td_6 = ref(null);
+    const td_7 = ref(null);
+    const td_8 = ref(null);
+    const td_9 = ref(null);
+
     var count = 9;  // 가로/세로 칸 수
     var sudoku;
     var sudokuAnswer;
-    fnCreateSudoku();
+    
 
     // 수도쿠 생성
     function fnCreateSudoku() {
@@ -122,7 +135,7 @@
         // 숫자배열 섞기
         nums = fnMixArry(nums);
 
-        for (num of nums) {
+        for (const num of nums) {
             if (fnValidation(sudoku, emptyCell[0], emptyCell[1], num)) {
                 sudoku[emptyCell[0]][emptyCell[1]] = num;
                 fnMakeSudoku(sudoku);
@@ -185,8 +198,9 @@
 
     // 수도쿠 html 그리기
     function fnRenderBoard(sudoku) {
-        const boardDiv = document.getElementById("board");
-        boardDiv.innerHTML = "";
+        //const boardDiv = document.getElementById("board");
+        //board.value = "";
+        //boardDiv.innerHTML = "";
 
         for (var ii = 0; ii < sudoku.length; ii++) {
             for (var jj = 0; jj < sudoku[ii].length; jj++) {
@@ -221,7 +235,7 @@
                     fnCountValue(e.key);
                 });
                 
-                boardDiv.appendChild(input);
+                board.value.appendChild(input);
             }
         }
     }
@@ -231,7 +245,7 @@
     }
 
     function fnShowValue(value) {
-        for (obj of document.querySelectorAll("input")) {
+        for (const obj of document.querySelectorAll("input")) {
             if (value == obj.value && value != "0") {
                 obj.style.color = "ffffff";
                 obj.style.background = "red";
@@ -241,7 +255,7 @@
             }
         }
 
-        for (obj of document.querySelectorAll(".backboard-title")) {
+        for (const obj of document.querySelectorAll(".backboard-title")) {
             if (value == obj.innerHTML) {
                 obj.style.background = "red";
             }else {
@@ -252,103 +266,143 @@
 
     function fnCountValue(value) {
         var count = 0;
-        for (input of document.querySelectorAll("input")) {
+        for (const input of document.querySelectorAll("input")) {
             if (value == input.value) {
                 count++;
             }
         }
 
-        var tdText = document.getElementById("td_" + value);
-        tdText.innerText = count + " / 9";
+        //var tdText = document.getElementById("td_" + value);
+    //    td1.value.innerText = count + " / 9";
+
+        switch(value) {
+            case '1':
+                td_1.value.innerText = count + " / 9";;
+                break;
+            case '2':
+                td_2.value.innerText = count + " / 9";;
+                break;
+            case '3':
+                td_3.value.innerText = count + " / 9";;
+                break;
+            case '4':
+                td_4.value.innerText = count + " / 9";;
+                break;
+            case '5':
+                td_5.value.innerText = count + " / 9";;
+                break;
+            case '6':
+                td_6.value.innerText = count + " / 9";;
+                break;
+            case '7':
+                td_7.value.innerText = count + " / 9";;
+                break;
+            case '8':
+                td_8.value.innerText = count + " / 9";;
+                break;
+            case '9':
+                td_9.value.innerText = count + " / 9";;
+                break;
+        }
     }
+
+    onMounted(()=>{
+        fnCreateSudoku();
+    })
 </script>
-<style scoped>
-        input {
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            font-size: 18px;
-			border:1px solid #444444;
-			margin:0;
-			padding:0;
-        }
-        
-        input:disabled {
-            border:1px solid #444444;
-            background:#BDBDBD;
-            color:#ffffff;
-        }
+<style>
+    .sudoku input {
+        width: 40px; 
+        height: 40px;
+        text-align: center;
+        font-size: 18px;
+        border:1px solid #444444;
+        margin:0;
+        padding:0;
+    }
+    
+    .sudoku input:disabled {
+        border:1px solid #444444;
+        background:#BDBDBD;
+        color:#ffffff;
+    }
 
-        input:nth-child(n+1):nth-child(-n+9) {
-            border-top:5px solid #444444;
-        }
+    .sudoku input:nth-child(n+1):nth-child(-n+9) {
+        border-top:5px solid #444444;
+    }
 
-        input:nth-child(n+28):nth-child(-n+36) {
-            border-top:5px solid #444444;
-        }
+    .sudoku input:nth-child(n+28):nth-child(-n+36) {
+        border-top:5px solid #444444;
+    }
 
-        input:nth-child(n+55):nth-child(-n+63) {
-            border-top:5px solid #444444;
-        }
+    .sudoku input:nth-child(n+55):nth-child(-n+63) {
+        border-top:5px solid #444444;
+    }
 
-        input:nth-child(n+73):nth-child(-n+81) {
-            border-bottom:5px solid #444444;
-        }
+    .sudoku input:nth-child(n+73):nth-child(-n+81) {
+        border-bottom:5px solid #444444;
+    }
 
-        input:nth-child(9n + 1), input:nth-child(9n + 4), input:nth-child(9n + 7) {
-            border-left:5px solid #444444;
-        }
+    .sudoku input:nth-child(9n + 1), input:nth-child(9n + 4), input:nth-child(9n + 7) {
+        border-left:5px solid #444444;
+    }
 
-        input:nth-child(9n) {
-            border-right:5px solid #444444;
-        }
+    .sudoku input:nth-child(9n) {
+        border-right:5px solid #444444;
+    }
 
-        .board {
-            margin-top:10px;
-            display: grid;
-            grid-template-columns: repeat(9, 40px);
-            gap: 0px;
-            float:left;
-        }
+    .sudoku .board {
+        margin-top:10px;
+        display: grid;
+        grid-template-columns: repeat(9, 37px);
+        gap: 0px;
+        float:left;
+    }
 
-        .font-orange {
-            color:orange;
-        }
-        
-        .btnNumber {
-            width:30px;
-            height:30px;
-            font-size:14px;
-        }
+    .sudoku .font-orange {
+        color:orange;
+    }
+    
+    .sudoku .btnNumber {
+        font-size: 1.7rem;
+        font-weight: 500;
+        border-radius: 0.4rem;
+        border: 1px solid black;
+        margin: 0px 1px;
+        padding: 0 1rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+    }
 
-        .backboard {
-            margin-top:10px;
-            margin-left:10px;
-            border:1px solid #444444;
-            width:150px;
-            height:360px;
-            float:left;
-            border-collapse: collapse;
-        }
+    .sudoku .backboard {
+        margin-top:10px;
+        margin-left:10px;
+        border:1px solid #444444;
+        width:150px;
+        height:360px;
+        float:left;
+        border-collapse: collapse;
+    }
 
-        .backboard td {
-            border:1px solid #444444;
-            padding:0px 5px;
-            text-align: center;
-            font-weight:900;
-            color:#444444;
-        }
+    .sudoku .backboard td {
+        border:1px solid #444444;
+        padding:0px 5px;
+        text-align: center;
+        font-weight:900;
+        color:#444444;
+    }
 
-        .backboard td:first-child {
-            color:#ffffff;
-            width:50px;    
-        }
+    .sudoku .backboard td:first-child {
+        color:#ffffff;
+        width:50px;    
+    }
 
-        .backboard-title {
-            background:#BDBDBD;
-        }
+    .sudoku .backboard-title {
+        background:#BDBDBD;
+    }
 
-        .active {
-            background:red;
-        }
+    .sudoku .active {
+        background:red;
+    }
 </style>

@@ -1,7 +1,7 @@
 <template>
 
     <div class="slider-demo-block">
-        <span class="demonstration">준수 일자 검색(1일~400일)</span>
+        <span class="demonstration">준수(1일~400일)</span>
         <el-slider v-model="sliderValue" @change="dayChange" range show-stops :min="1" :max="400" />
     </div>
 
