@@ -23,6 +23,7 @@
         <div :class="{'spinner' : isSpinner }"></div>
         <!-- <easy-spinner :type="'circular'" :size="100" :class="spinner"/> -->
     </div>
+
 </template>
 
 <script setup>
@@ -37,9 +38,37 @@ import alertMsg from "@/utils/toastUtils";
 const store = useStore();
 const uploadFiles = ref([]);
 const createDates = ref([]);
-const saveBtnFlag = ref(false);
 const isSpinner = ref(false);
+const saveBtnFlag = ref(true);
 
+let count = 0;
+let countStandard = store.getters['upload/getCountStandard'];
+let interval = [];
+
+const gogogo = async(id,rawFile) => {
+
+    if(id < store.getters['upload/getCountStandard']){
+        rawFile =await getHeicToJpeg(rawFile);
+        console.log('완료됀 된 카운트 >>>',id);  
+
+        if(id == store.getters['upload/getCountStandard']-1 || id == count) {
+            store.dispatch('upload/setCountStandard', 3);
+            if(count+3<store.getters['upload/getCountStandard']) {
+                isSpinner.value = false;
+                saveBtnFlag.value =  true; 
+            }
+        }
+        return true;
+    } else {
+
+        setTimeout(()=>{
+            console.log('5초마다 재시도중 >>>',id);
+            gogogo(id,rawFile);
+
+        },5000)
+
+    }
+}
 /**
  * 업로드 전
  * action 에 적힌 url 타기 전인데 return false로 rawFile 정보 저장
@@ -47,9 +76,15 @@ const isSpinner = ref(false);
 const beforeAvatarUpload = async(rawFile) => {
 
     isSpinner.value = true;
-    saveBtnFlag.value = false;
+    saveBtnFlag.value =  false; 
 
-    console.log('rawFile', rawFile);
+    count++;    
+    
+    let id = count;
+
+
+
+    //console.log('rawFile', rawFile);
         
     let ext = rawFile.name.split('.').pop().toLowerCase();
 
@@ -62,11 +97,14 @@ const beforeAvatarUpload = async(rawFile) => {
     // fileName.value = rawFile.name;
     // fileSize.value = rawFile.size/1000 + 'kb'
     const date = new Date(rawFile.lastModifiedDate);
-    
-   
+
     //heic -> jpeg
     if(ext == "heic"){
-        rawFile =await getHeicToJpeg(rawFile);
+
+       const pass =  gogogo(id,rawFile);
+       if(!pass){
+        return;
+       }
     }
 
     // 원하는 형식으로 날짜 형식화
@@ -74,13 +112,9 @@ const beforeAvatarUpload = async(rawFile) => {
                       ("0" + (date.getMonth() + 1)).slice(-2) +
                       ("0" + date.getDate()).slice(-2);
 
-    
     uploadFiles.value.push(rawFile);
     createDates.value.push(createDate);
-    
-    
-    saveBtnFlag.value = true;
-    isSpinner.value = false;
+     
     
     return false;
 }
@@ -88,6 +122,7 @@ const beforeAvatarUpload = async(rawFile) => {
 
 const getHeicToJpeg = async (file)=>{
     const blob = new Blob([file]);
+
 	const JpegBlob = await heic2any({
 		blob:blob,
 		toType: 'image/jpeg'
