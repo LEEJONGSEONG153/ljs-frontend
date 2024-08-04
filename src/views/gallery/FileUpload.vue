@@ -10,7 +10,7 @@
         >
             <el-icon class="el-icon--upload"><upload-filled /></el-icon>
             <div class="el-upload__text">
-            파일을 끌어 놓으세요
+            파일을 선택해 주세요
             <!-- Drop file here or <em>click to upload</em> -->
             </div>
         </el-upload>
@@ -21,7 +21,8 @@
     </div>
     <div>
         <div :class="{'spinner' : isSpinner }"></div>
-        <!-- <easy-spinner :type="'circular'" :size="100" :class="spinner"/> -->
+        <h4 v-if="isSpinner">heic -> jpeg 로 변환중 {{completeCoount}}/{{totalCount}}</h4>
+        
     </div>
 
 </template>
@@ -39,17 +40,22 @@ const store = useStore();
 const uploadFiles = ref([]);
 const createDates = ref([]);
 const isSpinner = ref(false);
-const saveBtnFlag = ref(true);
+const saveBtnFlag = ref(false);
 
 let count = 0;
 let countStandard = store.getters['upload/getCountStandard'];
 let interval = [];
 
-const gogogo = async(id,rawFile) => {
+const completeCoount = ref(0);
+const totalCount = ref(0);
+
+const gogogo = async(id,rawFile,date) => {
 
     if(id < store.getters['upload/getCountStandard']){
         rawFile =await getHeicToJpeg(rawFile);
         console.log('완료됀 된 카운트 >>>',id);  
+                
+        completeCoount.value = id;
 
         if(id == store.getters['upload/getCountStandard']-1 || id == count) {
             store.dispatch('upload/setCountStandard', 3);
@@ -58,12 +64,20 @@ const gogogo = async(id,rawFile) => {
                 saveBtnFlag.value =  true; 
             }
         }
+        // 원하는 형식으로 날짜 형식화
+        let createDate = date.getFullYear() +
+                        ("0" + (date.getMonth() + 1)).slice(-2) +
+                        ("0" + date.getDate()).slice(-2);
+
+        uploadFiles.value.push(rawFile);
+        createDates.value.push(createDate);
+
         return true;
     } else {
 
         setTimeout(()=>{
             console.log('5초마다 재시도중 >>>',id);
-            gogogo(id,rawFile);
+            gogogo(id,rawFile,date);
 
         },5000)
 
@@ -79,10 +93,8 @@ const beforeAvatarUpload = async(rawFile) => {
     saveBtnFlag.value =  false; 
 
     count++;    
-    
+    totalCount.value = count;
     let id = count;
-
-
 
     //console.log('rawFile', rawFile);
         
@@ -101,20 +113,23 @@ const beforeAvatarUpload = async(rawFile) => {
     //heic -> jpeg
     if(ext == "heic"){
 
-       const pass =  gogogo(id,rawFile);
+       const pass =  gogogo(id,rawFile,date);
        if(!pass){
         return;
        }
+    } else {
+
+                // 원하는 형식으로 날짜 형식화
+        let createDate = date.getFullYear() +
+                        ("0" + (date.getMonth() + 1)).slice(-2) +
+                        ("0" + date.getDate()).slice(-2);
+
+        uploadFiles.value.push(rawFile);
+        createDates.value.push(createDate);
+
+        isSpinner.value = false;
+        saveBtnFlag.value =  true; 
     }
-
-    // 원하는 형식으로 날짜 형식화
-    let createDate = date.getFullYear() +
-                      ("0" + (date.getMonth() + 1)).slice(-2) +
-                      ("0" + date.getDate()).slice(-2);
-
-    uploadFiles.value.push(rawFile);
-    createDates.value.push(createDate);
-     
     
     return false;
 }
