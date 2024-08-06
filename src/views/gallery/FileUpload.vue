@@ -218,9 +218,9 @@ const saveFile = async () => {
                 }
             }
 
-            const result = await usePost('/api/v1/fileUpload', formData, axiosConfig);
+            //const result = await usePost('/api/v1/fileUpload', formData, axiosConfig);
             
-            //const result = await usePost('/convert-and-upload', formData, axiosConfig);
+            const result = await usePost('/convert-and-upload', formData, axiosConfig);
             
             alertMsg("업로드 완료되었습니다.", "", "success");
 
