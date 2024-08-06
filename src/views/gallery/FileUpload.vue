@@ -87,7 +87,7 @@ const gogogo = async(id,rawFile,date) => {
  * 업로드 전
  * action 에 적힌 url 타기 전인데 return false로 rawFile 정보 저장
  */
-const beforeAvatarUpload = async(rawFile) => {
+const beforeAvatarUpload_back = async(rawFile) => {
 
     isSpinner.value = true;
     saveBtnFlag.value =  false; 
@@ -133,6 +133,50 @@ const beforeAvatarUpload = async(rawFile) => {
     
     return false;
 }
+/**
+ * 업로드 전
+ * action 에 적힌 url 타기 전인데 return false로 rawFile 정보 저장
+ */
+const beforeAvatarUpload = async(rawFile) => {
+
+    // isSpinner.value = true;
+    //saveBtnFlag.value =  false; 
+
+    // count++;    
+    // totalCount.value = count;
+    // let id = count;
+
+    //console.log('rawFile', rawFile);
+        
+    let ext = rawFile.name.split('.').pop().toLowerCase();
+
+    //todo 확장자 체크 필요 and 여러개 올리고 싶은것에 대한 경고문 필요
+    if(!['jpg', 'jpeg', 'png', 'gif', 'bmp', 'mp4', 'mov', 'heic'].includes(ext)){
+         ElMessage.error(ext+'확장자는 허용 되지 않습니다.')
+         return false;
+    }
+    // uploadFile = rawFile;
+    // fileName.value = rawFile.name;
+    // fileSize.value = rawFile.size/1000 + 'kb'
+    const date = new Date(rawFile.lastModifiedDate);
+
+    // 원하는 형식으로 날짜 형식화
+    let createDate = date.getFullYear() +
+                    ("0" + (date.getMonth() + 1)).slice(-2) +
+                    ("0" + date.getDate()).slice(-2);
+
+    
+
+    uploadFiles.value.push(rawFile);
+    createDates.value.push(createDate);
+
+
+    // isSpinner.value = false;
+    saveBtnFlag.value =  true; 
+
+    
+    return false;
+}
 
 
 const getHeicToJpeg = async (file)=>{
@@ -163,6 +207,7 @@ const saveFile = async () => {
             let formData = new FormData();
 
             for(let i=0;i<uploadFiles.value.length; i++) {
+
                 formData.append("uploadFiles",uploadFiles.value[i]);
                 formData.append("createDates",createDates.value[i]);
             }
@@ -174,6 +219,8 @@ const saveFile = async () => {
             }
 
             const result = await usePost('/api/v1/fileUpload', formData, axiosConfig);
+            
+            //const result = await usePost('/convert-and-upload', formData, axiosConfig);
             
             alertMsg("업로드 완료되었습니다.", "", "success");
 
