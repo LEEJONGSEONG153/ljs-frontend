@@ -1,85 +1,61 @@
-
-
-
-
-
-
-
-
-
 <template>
-    <div class="sudoku container">
-        <div class="container-top">
-            <div class="select container-lv">
-                <input type="radio" id="sLevelL" name="sudokuLevel" value="L" /><label for="sLevelL">에이..</label>
-                <input type="radio" id="sLevelM" name="sudokuLevel" value="M" checked/><label for="sLevelM">그냥~</label>
-                <input type="radio" id="sLevelH" name="sudokuLevel" value="H" /><label for="sLevelH">오호!</label>
-                <input type="radio" id="sLevelU" name="sudokuLevel" value="U" /><label for="sLevelU">어쭈?</label>
-            </div>
-            <div class="container-btn">
-                <button class="btnStart" @click="fnStartTimer()" style="width:49%; height:40px;">게임시작</button>
-                <button class="btnEnd" @click="fnEndTimer()" style="width:49%; height:40px;">게임종료</button>
-            </div>
-        </div>
-        <div class="container-num" >
-            <button class="btnNumber" @click="fnShowValue(0)">0</button>
-            <button class="btnNumber" @click="fnShowValue(1)">1</button>
-            <button class="btnNumber" @click="fnShowValue(2)">2</button>
-            <button class="btnNumber" @click="fnShowValue(3)">3</button>
-            <button class="btnNumber" @click="fnShowValue(4)">4</button>
-            <button class="btnNumber" @click="fnShowValue(5)">5</button>
-            <button class="btnNumber" @click="fnShowValue(6)">6</button>
-            <button class="btnNumber" @click="fnShowValue(7)">7</button>
-            <button class="btnNumber" @click="fnShowValue(8)">8</button>
-            <button class="btnNumber" @click="fnShowValue(9)">9</button>
-        </div>
-        <div class="board" id="board" style="width:60%;"></div>
+    <div class="sudoku">
+        <button class="btnNumber" @click="fnShowValue(0)">0</button>
+        <button class="btnNumber" @click="fnShowValue(1)">1</button>
+        <button class="btnNumber" @click="fnShowValue(2)">2</button>
+        <button class="btnNumber" @click="fnShowValue(3)">3</button>
+        <button class="btnNumber" @click="fnShowValue(4)">4</button>
+        <button class="btnNumber" @click="fnShowValue(5)">5</button>
+        <button class="btnNumber" @click="fnShowValue(6)">6</button>
+        <button class="btnNumber" @click="fnShowValue(7)">7</button>
+        <button class="btnNumber" @click="fnShowValue(8)">8</button>
+        <button class="btnNumber" @click="fnShowValue(9)">9</button>
+        <div class="board" ref="board"></div>
         <table class="backboard" id="backboard">
             <tbody>
                 <tr>
                     <td class="backboard-title">1</td>
-                    <td id="td_1"></td>
+                    <td ref="td_1"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">2</td>
-                    <td id="td_2"></td>
+                    <td ref="td_2"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">3</td>
-                    <td id="td_3"></td>
+                    <td ref="td_3"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">4</td>
-                    <td id="td_4"></td>
+                    <td ref="td_4"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">5</td>
-                    <td id="td_5"></td>
+                    <td ref="td_5"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">6</td>
-                    <td id="td_6"></td>
+                    <td ref="td_6"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">7</td>
-                    <td id="td_7"></td>
+                    <td ref="td_7"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">8</td>
-                    <td id="td_8"></td>
+                    <td ref="td_8"></td>
                 </tr>
                 <tr>
                     <td class="backboard-title">9</td>
-                    <td id="td_9"></td>
+                    <td ref="td_9"></td>
                 </tr>
+
             </tbody>
         </table>
-        <div id="areaTime" style="width:100%; height:100px; float:left; text-align:center; padding:10px; font-size:30px; font-weight:bold"></div>
     </div>
 </template>
-
 <script setup>
-    import {onMounted, ref} return "vue";
+    import { onMounted, ref } from 'vue';
 
     const board = ref(null);
     const td_1 = ref(null);
@@ -92,23 +68,10 @@
     const td_8 = ref(null);
     const td_9 = ref(null);
 
-    // 표시 색상 정보
-    let errorColor = "orange";
-    let normalColor = "#444444";
-    let normalBgColor = "#444444";
-    let viewBgColor = "orange";
-
-    // 수도쿠 정보
-    let count = 9;  // 가로/세로 칸 수
-    let sudoku = [];
-    let sudokuAnswer;
-    let sudokuLevel;
-    let sudokuLvCount;
-
-    // 타이머 정보
-    let gameStart = false;
-    let sTime = 0;
-    let timerId;
+    var count = 9;  // 가로/세로 칸 수
+    var sudoku;
+    var sudokuAnswer;
+    
 
     // 수도쿠 생성
     function fnCreateSudoku() {
@@ -133,26 +96,7 @@
         }
     }
 
-    // 난수 생성
-    function fnGetRandom(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    // 빈Cell 생성
     function fnCreateEmpty(sudoku) {
-        // 난이도
-        sudokuLevel = document.querySelector("input[name='sudokuLevel']:checked").value;
-        
-        if (sudokuLevel == "L") {
-            sudokuLvCount = fnGetRandom(30, 40);
-        }else if (sudokuLevel == "M") {
-            sudokuLvCount = fnGetRandom(40, 50);
-        }else if (sudokuLevel == "H") {
-            sudokuLvCount = fnGetRandom(50, 60);
-        }else if (sudokuLevel == "U") {
-            sudokuLvCount = fnGetRandom(60, 70);
-        }
-
         var emptyCount = 0; 
         var emptyBoolean = true;
         while(emptyBoolean) {
@@ -165,7 +109,7 @@
                 emptyCount++;
             }
 
-            if (emptyCount == sudokuLvCount) {
+            if (emptyCount == 50) {
                 emptyBoolean = false;
             }            
         }
@@ -191,7 +135,7 @@
         // 숫자배열 섞기
         nums = fnMixArry(nums);
 
-        for (num of nums) {
+        for (const num of nums) {
             if (fnValidation(sudoku, emptyCell[0], emptyCell[1], num)) {
                 sudoku[emptyCell[0]][emptyCell[1]] = num;
                 fnMakeSudoku(sudoku);
@@ -254,8 +198,9 @@
 
     // 수도쿠 html 그리기
     function fnRenderBoard(sudoku) {
-        const boardDiv = document.getElementById("board");
-        boardDiv.innerHTML = "";
+        //const boardDiv = document.getElementById("board");
+        //board.value = "";
+        //boardDiv.innerHTML = "";
 
         for (var ii = 0; ii < sudoku.length; ii++) {
             for (var jj = 0; jj < sudoku[ii].length; jj++) {
@@ -282,69 +227,54 @@
                     var target = document.getElementById(targetId);
 
                     if (fnValidation(sudoku, ii, jj, e.key)) {
-                        target.style.color = normalColor;
-
-                        sudoku[ii][jj] = e.key;
+                        target.style.color = "#444444";
                     }else {
-                        target.style.color = errorColor;
-                        sudoku[ii][jj] = "";
+                        target.style.color = "red";
                     }
 
                     fnCountValue(e.key);
-
-                    // 빈 cell이 없을 경우 게임 종료
-                    if (fnFindEmptyCell(sudoku) == null) {
-                        fnEndTimer();
-                        alert("게임 종료!");
-                    }
                 });
                 
-                boardDiv.appendChild(input);
+                board.value.appendChild(input);
             }
         }
     }
 
-    // 수도쿠판 색상 표시
+    function fnCheckValue() {
+        console.log(sudokuAnswer);
+    }
+
     function fnShowValue(value) {
-        if (gameStart) {
-            for (obj of document.querySelectorAll("input")) {
-                if (value == obj.value && value != "0") {
-                    obj.style.color = "ffffff";
-                    obj.style.background = viewBgColor;
-                }else {
-                    obj.style.color = "";
-                    obj.style.background = "";
-                }
+        for (const obj of document.querySelectorAll("input")) {
+            if (value == obj.value && value != "0") {
+                obj.style.color = "ffffff";
+                obj.style.background = "red";
+            }else {
+                obj.style.color = "";
+                obj.style.background = "";
             }
-
-            for (obj of document.querySelectorAll(".backboard-title")) {
-                if (value == obj.innerHTML) {
-                    obj.style.background = viewBgColor;
-                }else {
-                    obj.style.background = normalBgColor;
-                }
-            };
-        }else {
-            alert("게임이 시작되지 않았습니다.");
-            return;
         }
+
+        for (const obj of document.querySelectorAll(".backboard-title")) {
+            if (value == obj.innerHTML) {
+                obj.style.background = "red";
+            }else {
+                obj.style.background = "#BDBDBD";
+            }
+        };
     }
 
-    // 수도쿠 숫자 표시
     function fnCountValue(value) {
         var count = 0;
-
-        for (var ii = 0; ii < sudoku.length; ii++) {
-            for (var jj = 0; jj < sudoku[ii].length; jj++) {
-                if (sudoku[ii][jj] == value) {
-                    count++;
-                }
+        for (const input of document.querySelectorAll("input")) {
+            if (value == input.value) {
+                count++;
             }
         }
 
-        // ??
-        // var tdText = document.getElementById("td_" + value);
-        // tdText.innerText = count + " / 9";
+        //var tdText = document.getElementById("td_" + value);
+    //    td1.value.innerText = count + " / 9";
+
         switch(value) {
             case '1':
                 td_1.value.innerText = count + " / 9";;
@@ -374,61 +304,15 @@
                 td_9.value.innerText = count + " / 9";;
                 break;
         }
-        onMounted(()=>{
-            // fnCreateSudoku();
-        })
     }
 
-    // 타이머 시작
-    function fnStartTimer() {
-        // 수도쿠 배열 생성
+    onMounted(()=>{
         fnCreateSudoku();
-
-        sTime = 0;
-        document.querySelector("#areaTime").innerText = "00 : 00 : 00";    
-
-        // 타이머 종료
-        clearInterval(timerId);
-
-        timerId = setInterval(function() {
-            sTime++;
-
-            var sHour = 0;
-            var sMin = 0;
-            var sSec = 0;
-
-            sHour = Math.floor(sTime / (60 * 60));
-            var remainTime = sTime % (60 * 60);
-            sMin = Math.floor(remainTime / 60);
-            var sSec = remainTime % 60;
-        
-            document.querySelector("#areaTime").innerText = sHour.toString().padStart(2, "0") + " : " + sMin.toString().padStart(2, "0") + " : " + sSec.toString().padStart(2, "0");    
-        }, 1000);
-
-        gameStart = true;
-    }
-
-    // 타이머 종료
-    function fnEndTimer() {
-        // 모든 cell disabled
-        document.querySelectorAll("input[type='text']").forEach((element) => {
-            element.readOnly = true;
-        });
-
-        // 타이머 종료
-        clearInterval(timerId);
-        
-        gameStart = false;
-    }
+    })
 </script>
 <style>
-    * {
-        margin:0;
-        padding:0;
-    }
-
-    input[type='text'] {
-        width: 40px;
+    .sudoku input {
+        width: 40px; 
         height: 40px;
         text-align: center;
         font-size: 18px;
@@ -437,55 +321,61 @@
         padding:0;
     }
     
-    input:disabled {
+    .sudoku input:disabled {
         border:1px solid #444444;
         background:#BDBDBD;
         color:#ffffff;
     }
 
-    input:nth-child(n+1):nth-child(-n+9) {
+    .sudoku input:nth-child(n+1):nth-child(-n+9) {
         border-top:5px solid #444444;
     }
 
-    input:nth-child(n+28):nth-child(-n+36) {
+    .sudoku input:nth-child(n+28):nth-child(-n+36) {
         border-top:5px solid #444444;
     }
 
-    input:nth-child(n+55):nth-child(-n+63) {
+    .sudoku input:nth-child(n+55):nth-child(-n+63) {
         border-top:5px solid #444444;
     }
 
-    input:nth-child(n+73):nth-child(-n+81) {
+    .sudoku input:nth-child(n+73):nth-child(-n+81) {
         border-bottom:5px solid #444444;
     }
 
-    input:nth-child(9n + 1), input:nth-child(9n + 4), input:nth-child(9n + 7) {
+    .sudoku input:nth-child(9n + 1), input:nth-child(9n + 4), input:nth-child(9n + 7) {
         border-left:5px solid #444444;
     }
 
-    input:nth-child(9n) {
+    .sudoku input:nth-child(9n) {
         border-right:5px solid #444444;
     }
 
-    .board {
+    .sudoku .board {
         margin-top:10px;
         display: grid;
-        grid-template-columns: repeat(9, 40px);
+        grid-template-columns: repeat(9, 37px);
         gap: 0px;
         float:left;
     }
 
-    .font-orange {
+    .sudoku .font-orange {
         color:orange;
     }
     
-    .btnNumber {
-        width:30px;
-        height:30px;
-        font-size:14px;
+    .sudoku .btnNumber {
+        font-size: 1.7rem;
+        font-weight: 500;
+        border-radius: 0.4rem;
+        border: 1px solid black;
+        margin: 0px 1px;
+        padding: 0 1rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
     }
 
-    .backboard {
+    .sudoku .backboard {
         margin-top:10px;
         margin-left:10px;
         border:1px solid #444444;
@@ -495,85 +385,24 @@
         border-collapse: collapse;
     }
 
-    .backboard td {
+    .sudoku .backboard td {
         border:1px solid #444444;
-        padding:10px 5px;
+        padding:0px 5px;
         text-align: center;
         font-weight:900;
         color:#444444;
     }
 
-    .backboard td:first-child {
+    .sudoku .backboard td:first-child {
         color:#ffffff;
         width:50px;    
     }
 
-    .backboard-title {
-        background:#444444;
+    .sudoku .backboard-title {
+        background:#BDBDBD;
     }
 
-    .select input[type=radio]{
-        display: none;
-    }
-
-    .select input[type=radio]+label{
-        display: inline-block;
-        cursor: pointer;
-        height: 40px;
-        width: 140px;
-        border: 1px solid #444444;
-        line-height: 40px;
-        text-align: center;
-        font-size:13px;
-    }
-
-    .select input[type=radio]+label{
-        background-color: #fff;
-        color: #444444;
-    }
-
-    .select input[type=radio]:checked+label{
-        background-color: #444444;
-        color: #fff;
-    }
-
-    button {
-        background:#444444;
-        color:#ffffff;
-        cursor: pointer;
-    }
-
-    .container {
-        width:600px; 
-        height:100%; 
-        float:left;
-        padding:10px;
-    }
-    
-    .container-top {
-        width:100%; 
-        /* border:1px solid blue; */
-    }
-
-    .container-lv {
-        /* border:1px solid orange; */
-        padding:5px;
-    }
-
-    .container-btn {
-        /* border:1px solid orange; */
-        padding:5px;
-    }
-
-    .container-num {
-        float:left; 
-        width:100%;
-        padding:5px;
-        /* border:1px solid orange; */
-    }
-
-    .container-num button {
-        width:53.2px;
-        height:40px;
+    .sudoku .active {
+        background:red;
     }
 </style>
