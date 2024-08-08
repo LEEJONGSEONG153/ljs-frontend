@@ -1,5 +1,6 @@
 <template>
     <div class="sudoku">
+        <h2>푸헬헬</h2>
         <button class="btnNumber" @click="fnShowValue(0)">0</button>
         <button class="btnNumber" @click="fnShowValue(1)">1</button>
         <button class="btnNumber" @click="fnShowValue(2)">2</button>
