@@ -9,8 +9,8 @@
                     <input type="radio" id="sLevelU" name="sudokuLevel" value="U" /><label for="sLevelU">어쭈?</label>
                 </div>
                 <div class="container-btn">
-                    <button class="btnStart" @click="fnStartTimer()" style="width:49%; height:40px;">게임시작</button>
-                    <button class="btnEnd" @click="fnEndTimer()" style="width:49%; height:40px;">게임종료</button>
+                    <button class="s-btn btnStart" @click="fnStartTimer()">게임시작</button>
+                    <button class="s-btn btnEnd" @click="fnEndTimer()">게임종료</button>
                 </div>
             </div>
             <div class="container-num" >
@@ -28,42 +28,30 @@
             <div class="container-board">
                 <div class="board" ref="board"></div>
                 <table class="backboard" id="backboard">
+                    <thead>
+                        <tr>
+                            <th class="backboard-title">1</th>
+                            <th class="backboard-title">2</th>
+                            <th class="backboard-title">3</th>
+                            <th class="backboard-title">4</th>
+                            <th class="backboard-title">5</th>
+                            <th class="backboard-title">6</th>
+                            <th class="backboard-title">7</th>
+                            <th class="backboard-title">8</th>
+                            <th class="backboard-title">9</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
-                            <td class="backboard-title">1</td>
-                            <td ref="td_1"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">2</td>
-                            <td ref="td_2"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">3</td>
-                            <td ref="td_3"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">4</td>
-                            <td ref="td_4"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">5</td>
-                            <td ref="td_5"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">6</td>
-                            <td ref="td_6"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">7</td>
-                            <td ref="td_7"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">8</td>
-                            <td ref="td_8"></td>
-                        </tr>
-                        <tr>
-                            <td class="backboard-title">9</td>
-                            <td ref="td_9"></td>
+                            <td class="backboard-num" ref="td_1"></td>
+                            <td class="backboard-num" ref="td_2"></td>
+                            <td class="backboard-num" ref="td_3"></td>
+                            <td class="backboard-num" ref="td_4"></td>
+                            <td class="backboard-num" ref="td_5"></td>
+                            <td class="backboard-num" ref="td_6"></td>
+                            <td class="backboard-num" ref="td_7"></td>
+                            <td class="backboard-num" ref="td_8"></td>
+                            <td class="backboard-num" ref="td_9"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -88,10 +76,10 @@
     const areaTime = ref(null);
 
     // 표시 색상 정보
-    let errorColor = "orange";
+    let errorColor = "#DB0000";
     let normalColor = "#444444";
     let normalBgColor = "#444444";
-    let viewBgColor = "orange";
+    let viewBgColor = "#DB0000";
 
     // 수도쿠 정보
     let count = 9;  // 가로/세로 칸 수
@@ -290,7 +278,6 @@
                     // 빈 cell이 없을 경우 게임 종료
                     if (fnFindEmptyCell(sudoku) == null) {
                         fnEndTimer();
-                        alert("게임 종료!");
                     }
                 });
                 
@@ -341,31 +328,31 @@
         // tdText.innerText = count + " / 9";
         switch(value) {
             case '1':
-                td_1.value.innerText = count + " / 9";;
+                td_1.value.innerText = count;
                 break;
             case '2':
-                td_2.value.innerText = count + " / 9";;
+                td_2.value.innerText = count;
                 break;
             case '3':
-                td_3.value.innerText = count + " / 9";;
+                td_3.value.innerText = count;
                 break;
             case '4':
-                td_4.value.innerText = count + " / 9";;
+                td_4.value.innerText = count;
                 break;
             case '5':
-                td_5.value.innerText = count + " / 9";;
+                td_5.value.innerText = count;
                 break;
             case '6':
-                td_6.value.innerText = count + " / 9";;
+                td_6.value.innerText = count;
                 break;
             case '7':
-                td_7.value.innerText = count + " / 9";;
+                td_7.value.innerText = count;
                 break;
             case '8':
-                td_8.value.innerText = count + " / 9";;
+                td_8.value.innerText = count;
                 break;
             case '9':
-                td_9.value.innerText = count + " / 9";;
+                td_9.value.innerText = count;
                 break;
         }
     }
@@ -411,11 +398,6 @@
 
     // 타이머 종료
     function fnEndTimer() {
-        if (!gameStart) {
-            alert("게임을 시작하지 않았습니다.");
-            return;
-        }
-
         // 모든 cell disabled
         document.querySelectorAll("input[type='text']").forEach((element) => {
             element.readOnly = true;
@@ -440,9 +422,92 @@
         padding:0;
     }
 
+    .sudoku .container {
+        width:320px; 
+        height:100%; 
+        float:left;
+    }
+
+    .sudoku .container .container-top {
+        width:100%; 
+        /* border:1px solid blue; */
+    }
+
+    .sudoku .container .container-lv {
+        /* border:1px solid orange; */
+        padding:5px 0;
+    }
+
+    .sudoku .container .container-lv input[type=radio] {
+        display: none;
+    }
+
+    .sudoku .container .container-lv input[type=radio] + label {
+        display: inline-block;
+        cursor: pointer;
+        height: 25px;
+        width: 80px;
+        border: none;
+        line-height: 25px;
+        text-align: center;
+        font-size:13px;
+    }
+
+    .sudoku .container .container-lv input[type=radio] + label {
+        background-color: #fff;
+        color: #444444;
+    }
+
+    .sudoku .container .container-lv input[type=radio]:checked + label {
+        background-color: #444444;
+        color: #fff;
+    }
+
+    .sudoku .container .container-btn {
+        /* border:1px solid orange; */
+        padding:5px 0;
+    }
+
+    .sudoku .container .container-btn .s-btn {
+        padding:5px;
+        width:160px;
+    }
+
+    .sudoku .container .container-num {
+        float:left; 
+        width:100%;
+        padding:5px 0;
+        /* border:1px solid orange; */
+    }
+
+    .sudoku .container .container-num button {
+        width:64px;
+        height:30px;
+    }
+
+    .sudoku button {
+        background:#ffffff;
+        border:1px solid #444444;
+        color:#444444;
+        cursor: pointer;
+    }
+
+    .sudoku .container .container-board {
+        float:left; 
+        width:100%;
+        padding:5px 0;
+    }
+
+    .sudoku .container .container-board .board {
+        display: grid;
+        grid-template-columns: repeat(9, 35px);
+        gap: 0px;
+        float:left;
+    }
+
     .sudoku input[type='text'] {
-        width: 40px;
-        height: 40px;
+        width: 34px;
+        height: 34px;
         text-align: center;
         font-size: 18px;
         border:1px solid #444444;
@@ -472,7 +537,7 @@
         border-bottom:5px solid #444444;
     }
 
-    .sudoku input:nth-child(9n + 1), input:nth-child(9n + 4), input:nth-child(9n + 7) {
+    .sudoku input:nth-child(9n + 1), .sudoku input:nth-child(9n + 4), .sudoku input:nth-child(9n + 7) {
         border-left:5px solid #444444;
     }
 
@@ -480,113 +545,28 @@
         border-right:5px solid #444444;
     }
 
-    .sudoku .board {
-        margin-top:10px;
-        display: grid;
-        grid-template-columns: repeat(9, 40px);
-        gap: 0px;
-        float:left;
-    }
-
-    .sudoku .font-orange {
-        color:orange;
-    }
-    
-    .sudoku .btnNumber {
-        width:30px;
-        height:30px;
-        font-size:14px;
-    }
-
-    .sudoku .backboard {
-        margin-top:10px;
-        margin-left:10px;
+    .sudoku .container .container-board .backboard {
+        margin-top:5px;
         border:1px solid #444444;
-        width:150px;
-        height:360px;
+        width:320px;
+        height:60px;
         float:left;
         border-collapse: collapse;
     }
 
-    .sudoku .backboard td {
-        border:1px solid #444444;
-        padding:10px 5px;
-        text-align: center;
-        font-weight:900;
+    .sudoku .container .container-board .backboard .backboard-title {
+        height:30px;
+        background:#444444;
+        color:#ffffff;
+        font-size: 16px;
+    }
+
+    .sudoku .container .container-board .backboard .backboard-num {
+        height:30px;
         color:#444444;
-    }
-
-    .sudoku .backboard td:first-child {
-        color:#ffffff;
-        width:50px;    
-    }
-
-    .sudoku .backboard-title {
-        background:#444444;
-    }
-
-    .sudoku .select input[type=radio]{
-        display: none;
-    }
-
-    .sudoku .select input[type=radio]+label{
-        display: inline-block;
-        cursor: pointer;
-        height: 40px;
-        width: 140px;
-        border: 1px solid #444444;
-        line-height: 40px;
-        text-align: center;
-        font-size:13px;
-    }
-
-    .sudoku .select input[type=radio]+label{
-        background-color: #fff;
-        color: #444444;
-    }
-
-    .sudoku .select input[type=radio]:checked+label{
-        background-color: #444444;
-        color: #fff;
-    }
-
-    .sudoku button {
-        background:#444444;
-        color:#ffffff;
-        cursor: pointer;
-    }
-
-    .sudoku .container {
-        width:600px; 
-        height:100%; 
-        float:left;
-        padding:10px;
-    }
-    
-    .sudoku .container-top {
-        width:100%; 
-        /* border:1px solid blue; */
-    }
-
-    .sudoku .container-lv {
-        /* border:1px solid orange; */
-        padding:5px;
-    }
-
-    .sudoku .container-btn {
-        /* border:1px solid orange; */
-        padding:5px;
-    }
-
-    .sudoku .container-num {
-        float:left; 
-        width:100%;
-        padding:5px;
-        /* border:1px solid orange; */
-    }
-
-    .sudoku .container-num button {
-        width:53.2px;
-        height:40px;
-    }
+        border:1px solid #444444;
+        font-size: 16px;
+        text-align:center;
+        font-weight:bold;
+    }    
 </style>
